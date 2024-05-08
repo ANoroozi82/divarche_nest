@@ -6,12 +6,12 @@ import { PostsController } from './posts/posts.controller';
 import { UserController } from './controllers/user.controller';
 import { UserService } from './services/user/user.service';
 import { ResponseService } from './services/response/response.service';
-import { PostsService } from './services/posts/posts.service';
+import { ProductsService } from './services/products/products.service';
 
 @Module({
   imports: [],
   controllers: [AppController, PostsController, UserController],
-  providers: [AppService, UserService, ResponseService, PostsService],
+  providers: [AppService, UserService, ResponseService, ProductsService],
 })
 
 export class AppModule implements NestModule{
@@ -19,13 +19,13 @@ export class AppModule implements NestModule{
     consumer.apply(ValidationMiddleware).forRoutes(
       { path: '/posts/add', method: RequestMethod.POST},
 
-      { path: '/posts/update', method: RequestMethod.POST},
+      { path: '/products/update', method: RequestMethod.POST},
 
-      { path: '/posts/data', method: RequestMethod.GET},
+      { path: '/products/data', method: RequestMethod.GET},
 
-      { path: '/posts/selectdata', method: RequestMethod.GET},
+      { path: '/products/selectdata', method: RequestMethod.GET},
 
-      { path: '/posts/delete', method: RequestMethod.DELETE},
+      { path: '/products/delete', method: RequestMethod.DELETE},
 
       { path: '/user/signup', method: RequestMethod.POST},
 

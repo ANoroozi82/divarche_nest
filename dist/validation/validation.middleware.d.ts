@@ -1,4 +1,4 @@
-import { NestMiddleware } from '@nestjs/common';
+import { NestMiddleware } from "@nestjs/common";
 export declare class ValidationMiddleware implements NestMiddleware {
     private ajv;
     private validate;

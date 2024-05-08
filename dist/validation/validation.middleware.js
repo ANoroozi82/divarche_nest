@@ -15,12 +15,12 @@ let ValidationMiddleware = class ValidationMiddleware {
     constructor() {
         this.ajv = new ajv_1.default({ allErrors: true });
         this.validate = {
-            '/user/signup': this.ajv.compile(schemas_1.signup),
-            '/user/login': this.ajv.compile(schemas_1.login),
-            '/user/logout': this.ajv.compile(schemas_1.logout),
-            '/user/getInfo': this.ajv.compile(schemas_1.getInfo),
-            '/user/updateInfo': this.ajv.compile(schemas_1.updateInfo),
-            '/posts/add': this.ajv.compile(schemas_1.add),
+            "/user/signup": this.ajv.compile(schemas_1.signup),
+            "/user/login": this.ajv.compile(schemas_1.login),
+            "/user/logout": this.ajv.compile(schemas_1.logout),
+            "/user/getInfo": this.ajv.compile(schemas_1.getInfo),
+            "/user/updateInfo": this.ajv.compile(schemas_1.updateInfo),
+            "/posts/add": this.ajv.compile(schemas_1.add)
         };
     }
     use(req, res, next) {

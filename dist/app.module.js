@@ -15,10 +15,10 @@ const posts_controller_1 = require("./posts/posts.controller");
 const user_controller_1 = require("./controllers/user.controller");
 const user_service_1 = require("./services/user/user.service");
 const response_service_1 = require("./services/response/response.service");
-const posts_service_1 = require("./services/posts/posts.service");
+const products_service_1 = require("./services/products/products.service");
 let AppModule = class AppModule {
     configure(consumer) {
-        consumer.apply(validation_middleware_1.ValidationMiddleware).forRoutes({ path: '/posts/add', method: common_1.RequestMethod.POST }, { path: '/posts/update', method: common_1.RequestMethod.POST }, { path: '/posts/data', method: common_1.RequestMethod.GET }, { path: '/posts/selectdata', method: common_1.RequestMethod.GET }, { path: '/posts/delete', method: common_1.RequestMethod.DELETE }, { path: '/user/signup', method: common_1.RequestMethod.POST }, { path: '/user/login', method: common_1.RequestMethod.PUT }, { path: '/user/logout', method: common_1.RequestMethod.PUT }, { path: '/user/getInfo', method: common_1.RequestMethod.GET }, { path: '/user/updateInfo', method: common_1.RequestMethod.POST }, { path: '/user/delete', method: common_1.RequestMethod.DELETE });
+        consumer.apply(validation_middleware_1.ValidationMiddleware).forRoutes({ path: '/posts/add', method: common_1.RequestMethod.POST }, { path: '/products/update', method: common_1.RequestMethod.POST }, { path: '/products/data', method: common_1.RequestMethod.GET }, { path: '/products/selectdata', method: common_1.RequestMethod.GET }, { path: '/products/delete', method: common_1.RequestMethod.DELETE }, { path: '/user/signup', method: common_1.RequestMethod.POST }, { path: '/user/login', method: common_1.RequestMethod.PUT }, { path: '/user/logout', method: common_1.RequestMethod.PUT }, { path: '/user/getInfo', method: common_1.RequestMethod.GET }, { path: '/user/updateInfo', method: common_1.RequestMethod.POST }, { path: '/user/delete', method: common_1.RequestMethod.DELETE });
     }
 };
 exports.AppModule = AppModule;
@@ -26,7 +26,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
         controllers: [app_controller_1.AppController, posts_controller_1.PostsController, user_controller_1.UserController],
-        providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, posts_service_1.PostsService],
+        providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
