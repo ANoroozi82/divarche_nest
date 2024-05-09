@@ -6,8 +6,11 @@ export declare class baseService {
     selectParams: string;
     constructor(tableName: any);
     all(): Promise<this>;
-    where(condition: any): Promise<this>;
+    where(condition: any): this;
     insert(KEYS: any, VALUES: any): Promise<any>;
     update(KEY: any, VALUE: any): Promise<any>;
     get(): Promise<any>;
+    getSpecificRecord(params: any, conditions: Array<string>): Promise<any>;
+    deleteSpecificRecord(conditions: Array<string>): Promise<object>;
+    updateSpecificRecord(values: string, conditions: Array<string>): Promise<object>;
 }
