@@ -20,15 +20,19 @@ import { FieldsService } from "./services/fields/fields.service";
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(ValidationMiddleware).forRoutes(
-      { path: "/posts/add", method: RequestMethod.POST },
+      { path: "/products/products", method: RequestMethod.GET },
 
-      { path: "/products/update", method: RequestMethod.POST },
+      { path: "/products/product", method: RequestMethod.POST },
 
-      { path: "/products/data", method: RequestMethod.GET },
+      { path: "/products/product", method: RequestMethod.PUT },
 
-      { path: "/products/selectdata", method: RequestMethod.GET },
+      { path: "/products/product", method: RequestMethod.DELETE },
 
-      { path: "/products/delete", method: RequestMethod.DELETE },
+      { path: "/products/fields", method: RequestMethod.GET },
+
+      { path: "/products/category", method: RequestMethod.GET },
+
+      { path: "/products/categories", method: RequestMethod.GET },
 
       { path: "/user/signup", method: RequestMethod.POST },
 

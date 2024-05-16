@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.add = exports.signup = exports.updateInfo = exports.getInfo = exports.logout = exports.login = void 0;
+exports.fields = exports.deleteProduct = exports.nothing = exports.addProduct = exports.signup = exports.updateInfo = exports.login = void 0;
 exports.login = {
     "type": "object",
     "properties": {
@@ -11,18 +11,6 @@ exports.login = {
         "user",
         "pass"
     ],
-    "additionalProperties": false
-};
-exports.logout = {
-    "type": "object",
-    "properties": {},
-    "required": [],
-    "additionalProperties": false
-};
-exports.getInfo = {
-    "type": "object",
-    "properties": {},
-    "required": [],
     "additionalProperties": false
 };
 exports.updateInfo = {
@@ -59,21 +47,77 @@ exports.signup = {
     ],
     "additionalProperties": false
 };
-exports.add = {
+exports.addProduct = {
     "type": "object",
     "properties": {
-        "name": { "type": "string" },
+        "title": { "type": "string" },
         "description": { "type": "string" },
-        "price": { "type": "number" },
-        "category_id": { "type": "string" },
-        "city_id": { "type": "string" }
+        "price": { "type": "string" },
+        "address": { "type": "string" },
+        "categories_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "status": { "type": "string" },
+        "data": {
+            "type": "object",
+            "properties": {
+                "سال تولید": { "type": "string" },
+                "برند": { "type": "string" },
+                "رنگ": { "type": "string" },
+                "وضعیت شاسی": { "type": "string" },
+                "گیربکس": { "type": "string" },
+                "بیمه": { "type": "string" },
+                "مدل": { "type": "string" },
+                "نوع سوخت": { "type": "string" },
+                "حافظه داخلی": { "type": "string" },
+                "مقدار رم": { "type": "string" },
+                "تعداد سیمکارت": { "type": "string" },
+                "اندازه صفحه": { "type": "string" },
+                "سیستم عامل": { "type": "string" },
+                "پردازنده": { "type": "string" },
+                "پردازنده گرافیکی": { "type": "string" },
+                "تعداد دسته همراه": { "type": "string" },
+                "تعداد روز": { "type": "string" },
+                "نوع دسته": { "type": "string" }
+            },
+            "required": [],
+            "additionalProperties": false
+        },
     },
     "required": [
-        "name",
+        "title",
         "description",
         "price",
-        "category_id",
-        "city_id"
+        "categories_id",
+        "user_id",
+        "status",
+        "address",
+        "data"
+    ],
+    "additionalProperties": false
+};
+exports.nothing = {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+};
+exports.deleteProduct = {
+    "type": "object",
+    "properties": {
+        "product_id": { "type": "string" }
+    },
+    "required": [
+        "product_id",
+    ],
+    "additionalProperties": false
+};
+exports.fields = {
+    "type": "object",
+    "properties": {
+        "categories_id": { "type": "string" }
+    },
+    "required": [
+        "categories_id"
     ],
     "additionalProperties": false
 };

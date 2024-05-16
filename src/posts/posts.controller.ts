@@ -77,16 +77,15 @@ export class PostsController {
   }
 
   @Put("product")
-  async updateProduct(@Body() body : object ,@Res() res: Response){
+  async updateProduct(@Body() body: object, @Res() res: Response) {
     try {
 
-      const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body) ,["product_id", "=", `${body["product_id"]}`])
+      const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body), ["product_id", "=", `${body["product_id"]}`]);
 
       return res.status(result["affectedRows"] === 1 ? 200 : 409).json(ResponseService.setMeta({
         message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record updated` : `product '${body["product_id"]}' not found!!`
       }));
-    }
-    catch (e) {
+    } catch (e) {
       return res.status(500).json(ResponseService.setMeta({
         errors: e.message
       }));
@@ -160,7 +159,7 @@ export class PostsController {
 
     for (let i = 0; i < keys.length; i++) {
       if (keys[i] !== "product_id") {
-        returnValue += `${keys[i]} = '${values[i]}'${i !== keys.length - 1 ? ', ' : ''}`
+        returnValue += `${keys[i]} = '${values[i]}'${i !== keys.length - 1 ? ", " : ""}`;
       }
     }
 

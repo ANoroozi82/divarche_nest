@@ -11,26 +11,75 @@ const ajv_1 = require("ajv");
 const common_1 = require("@nestjs/common");
 const response_service_1 = require("../services/response/response.service");
 const schemas_1 = require("../schemas/schemas");
+const categories_service_1 = require("../services/categories/categories.service");
+const fields_service_1 = require("../services/fields/fields.service");
 let ValidationMiddleware = class ValidationMiddleware {
     constructor() {
         this.ajv = new ajv_1.default({ allErrors: true });
         this.validate = {
             "/user/signup": this.ajv.compile(schemas_1.signup),
             "/user/login": this.ajv.compile(schemas_1.login),
-            "/user/logout": this.ajv.compile(schemas_1.logout),
-            "/user/getInfo": this.ajv.compile(schemas_1.getInfo),
+            "/user/logout": this.ajv.compile(schemas_1.nothing),
+            "/user/getInfo": this.ajv.compile(schemas_1.nothing),
             "/user/updateInfo": this.ajv.compile(schemas_1.updateInfo),
-            "/posts/add": this.ajv.compile(schemas_1.add)
+            "/products/products": {
+                "GET": async () => schemas_1.nothing
+            },
+            "/products/product": {
+                "POST": async (body) => {
+                    if (Object.keys(body).includes("categories_id")) {
+                        const result = await this.getRequired(body);
+                        let postSchema = Object.assign({}, schemas_1.addProduct);
+                        postSchema["properties"]["data"]["required"] = this.convertStringToArray(result.fields);
+                        return postSchema;
+                    }
+                    else {
+                        throw new Error();
+                    }
+                },
+                "PUT": () => schemas_1.nothing,
+                "DELETE": () => schemas_1.deleteProduct
+            },
+            "/products/fields": {
+                "GET": async () => schemas_1.fields
+            },
+            "/products/category": {
+                "GET": async () => schemas_1.nothing
+            },
+            "/products/categories": {
+                "GET": async () => schemas_1.nothing
+            }
         };
     }
-    use(req, res, next) {
-        const valid = this.validate[req._parsedUrl.pathname];
-        if (valid(req.body)) {
-            next();
+    async use(req, res, next) {
+        if (Object.keys(req.query).length === 0) {
+            let valid;
+            try {
+                valid = this.ajv.compile(await this.validate[req._parsedUrl.pathname][req.method](req.body));
+            }
+            catch (e) {
+                res.status(409).json(response_service_1.ResponseService.setMeta({ message: e.message || e }));
+            }
+            if (valid(req.body)) {
+                next();
+            }
+            else {
+                res.status(409).json(response_service_1.ResponseService.setMeta(valid.errors));
+            }
         }
         else {
-            res.status(409).json(response_service_1.ResponseService.setMeta(valid.errors));
+            res.status(409).json(response_service_1.ResponseService.setMeta({ message: "queryParams must be null" }));
         }
+    }
+    async getRequired(body) {
+        const categoriesService = new categories_service_1.CategoriesService();
+        const fieldsService = new fields_service_1.FieldsService();
+        const categoriesResult = await categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`]);
+        const result = await fieldsService.getSpecificRecord("fields", ["fields_id", "=", `${categoriesResult[0]["fields_id"]}`]);
+        return result[0];
+    }
+    convertStringToArray(inputString) {
+        return inputString.replaceAll('\n', '').replaceAll('[', '').replaceAll(']', '').replaceAll("'", "").replaceAll("\r", "").split(",");
     }
 };
 exports.ValidationMiddleware = ValidationMiddleware;

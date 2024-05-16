@@ -149,7 +149,7 @@ let PostsController = class PostsController {
         let returnValue = "";
         for (let i = 0; i < keys.length; i++) {
             if (keys[i] !== "product_id") {
-                returnValue += `${keys[i]} = '${values[i]}'${i !== keys.length - 1 ? ', ' : ''}`;
+                returnValue += `${keys[i]} = '${values[i]}'${i !== keys.length - 1 ? ", " : ""}`;
             }
         }
         return returnValue;
