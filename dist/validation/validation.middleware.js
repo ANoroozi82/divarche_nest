@@ -26,18 +26,8 @@ let ValidationMiddleware = class ValidationMiddleware {
                 "GET": async () => schemas_1.nothing
             },
             "/products/product": {
-                "POST": async (body) => {
-                    if (Object.keys(body).includes("categories_id")) {
-                        const result = await this.getRequired(body);
-                        let postSchema = Object.assign({}, schemas_1.addProduct);
-                        postSchema["properties"]["data"]["required"] = this.convertStringToArray(result.fields);
-                        return postSchema;
-                    }
-                    else {
-                        throw new Error();
-                    }
-                },
-                "PUT": () => schemas_1.nothing,
+                "POST": this.bothPutandPost,
+                "PUT": this.bothPutandPost,
                 "DELETE": () => schemas_1.deleteProduct
             },
             "/products/fields": {
@@ -55,7 +45,7 @@ let ValidationMiddleware = class ValidationMiddleware {
         if (Object.keys(req.query).length === 0) {
             let valid;
             try {
-                valid = this.ajv.compile(await this.validate[req._parsedUrl.pathname][req.method](req.body));
+                valid = this.ajv.compile(await this.validate[req._parsedUrl.pathname][req.method](req.body, req.method, this));
             }
             catch (e) {
                 res.status(409).json(response_service_1.ResponseService.setMeta({ message: e.message || e }));
@@ -71,7 +61,28 @@ let ValidationMiddleware = class ValidationMiddleware {
             res.status(409).json(response_service_1.ResponseService.setMeta({ message: "queryParams must be null" }));
         }
     }
-    async getRequired(body) {
+    async bothPutandPost(body, method, thisClass) {
+        if (method === "POST" ? Object.keys(body).includes("categories_id") : (Object.keys(body).includes("categories_id") && Object.keys(body).includes("product_id"))) {
+            const result = await thisClass.getPostProductRequired(body);
+            let postSchema = Object.assign({}, schemas_1.addProduct);
+            postSchema["properties"]["data"]["required"] = thisClass.convertStringToArray(result.fields);
+            if (method === "PUT") {
+                if (!postSchema["required"].includes("product_id")) {
+                    postSchema["properties"]["product_id"] = { type: "string" };
+                    postSchema["required"].push("product_id");
+                }
+                postSchema["required"] = postSchema["required"].filter(item => item != "user_id");
+            }
+            return postSchema;
+        }
+        else {
+            if (method === "POST") {
+                throw new Error("body must have categories_id");
+            }
+            throw new Error("body must have product_id");
+        }
+    }
+    async getPostProductRequired(body) {
         const categoriesService = new categories_service_1.CategoriesService();
         const fieldsService = new fields_service_1.FieldsService();
         const categoriesResult = await categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`]);

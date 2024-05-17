@@ -80,6 +80,8 @@ export class PostsController {
   async updateProduct(@Body() body: object, @Res() res: Response) {
     try {
 
+      body["data"] = JSON.stringify(body["data"]);
+
       const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body), ["product_id", "=", `${body["product_id"]}`]);
 
       return res.status(result["affectedRows"] === 1 ? 200 : 409).json(ResponseService.setMeta({

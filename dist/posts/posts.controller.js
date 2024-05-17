@@ -79,6 +79,7 @@ let PostsController = class PostsController {
     }
     async updateProduct(body, res) {
         try {
+            body["data"] = JSON.stringify(body["data"]);
             const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body), ["product_id", "=", `${body["product_id"]}`]);
             return res.status(result["affectedRows"] === 1 ? 200 : 409).json(response_service_1.ResponseService.setMeta({
                 message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record updated` : `product '${body["product_id"]}' not found!!`
