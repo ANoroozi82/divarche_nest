@@ -12,7 +12,7 @@ const validation_middleware_1 = require("./validation/validation.middleware");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const posts_controller_1 = require("./posts/posts.controller");
-const user_controller_1 = require("./controllers/user.controller");
+const userinfo_controller_1 = require("./controllers/userinfo.controller");
 const user_service_1 = require("./services/user/user.service");
 const response_service_1 = require("./services/response/response.service");
 const products_service_1 = require("./services/products/products.service");
@@ -28,7 +28,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController, posts_controller_1.PostsController, user_controller_1.UserController],
+        controllers: [app_controller_1.AppController, posts_controller_1.PostsController, userinfo_controller_1.UserinfoController],
         providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService, categories_service_1.CategoriesService, fields_service_1.FieldsService, category_service_1.CategoryService]
     })
 ], AppModule);

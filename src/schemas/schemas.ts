@@ -1,8 +1,8 @@
 export const login: object = {
   "type": "object",
   "properties": {
-    "user": { "type": "string" },
-    "pass": { "type": "string" }
+    "username": { "type": "string" },
+    "password": { "type": "string" }
   },
   "required": [
     "user",
@@ -31,18 +31,20 @@ export const updateInfo: object = {
 export const signup: object = {
   "type": "object",
   "properties": {
-    "user": { "type": "string" },
-    "pass": { "type": "string" },
-    "role_name": { "type": "string" },
+    "full_name": {"type":"string"},
+    "phone_number": { "type": "string" },
     "city_id": { "type": "string" },
-    "phone_number": { "type": "string" }
+    "role_name": { "type": "string" },
+    "username": { "type": "string" },
+    "password": { "type": "string" }
   },
   "required": [
-    "user",
-    "pass",
-    "role_name",
+    "full_name",
+    "phone_number",
     "city_id",
-    "phone_number"
+    "role_name",
+    "username",
+    "password"
   ],
   "additionalProperties": false
 };

@@ -29,15 +29,15 @@ let baseService = class baseService {
             console.log(`connected model ${this.tablename}`);
         });
     }
-    async all() {
-        return this;
-    }
     where(condition) {
         this.wheres = condition;
         if (this.whereQuery) {
-            this.whereQuery += "AND";
+            this.whereQuery = this.whereQuery + "AND";
         }
-        this.whereQuery += ` ${condition[0]} ${condition[1]} '${condition[2]}'`;
+        else {
+            this.whereQuery = '';
+        }
+        this.whereQuery = this.whereQuery + `${condition[0]} ${condition[1]} '${condition[2]}'`;
         return this;
     }
     async insert(KEYS, VALUES) {
@@ -75,7 +75,11 @@ let baseService = class baseService {
         });
     }
     async get() {
-        this.whereQuery = "";
+        if (this.whereQuery)
+            this.whereQuery = `WHERE ${this.whereQuery}`;
+        else {
+            this.whereQuery = "";
+        }
         const finalQuery = `SELECT ${this.selectParams} FROM ${this.tablename} ${this.whereQuery}`;
         return await new Promise((resolve, reject) => {
             this.connection.query(finalQuery, (error, result) => {

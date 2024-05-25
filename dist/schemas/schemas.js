@@ -4,8 +4,8 @@ exports.fields = exports.deleteProduct = exports.nothing = exports.addProduct = 
 exports.login = {
     "type": "object",
     "properties": {
-        "user": { "type": "string" },
-        "pass": { "type": "string" }
+        "username": { "type": "string" },
+        "password": { "type": "string" }
     },
     "required": [
         "user",
@@ -32,18 +32,20 @@ exports.updateInfo = {
 exports.signup = {
     "type": "object",
     "properties": {
-        "user": { "type": "string" },
-        "pass": { "type": "string" },
-        "role_name": { "type": "string" },
+        "full_name": { "type": "string" },
+        "phone_number": { "type": "string" },
         "city_id": { "type": "string" },
-        "phone_number": { "type": "string" }
+        "role_name": { "type": "string" },
+        "username": { "type": "string" },
+        "password": { "type": "string" }
     },
     "required": [
-        "user",
-        "pass",
-        "role_name",
+        "full_name",
+        "phone_number",
         "city_id",
-        "phone_number"
+        "role_name",
+        "username",
+        "password"
     ],
     "additionalProperties": false
 };

@@ -3,7 +3,7 @@ import { ValidationMiddleware } from "./validation/validation.middleware";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { PostsController } from "./posts/posts.controller";
-import { UserController } from "./controllers/user.controller";
+import { UserinfoController } from "./controllers/userinfo.controller";
 import { UserService } from "./services/user/user.service";
 import { ResponseService } from "./services/response/response.service";
 import { ProductsService } from "./services/products/products.service";
@@ -13,7 +13,7 @@ import { FieldsService } from "./services/fields/fields.service";
 
 @Module({
   imports: [],
-  controllers: [AppController, PostsController, UserController],
+  controllers: [AppController, PostsController, UserinfoController],
   providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService]
 })
 

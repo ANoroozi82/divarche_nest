@@ -23,16 +23,15 @@ export class baseService {
     });
   }
 
-  async all() {
-    return this;
-  }
 
   where(condition) {
     this.wheres = condition;
     if (this.whereQuery) {
-      this.whereQuery += "AND";
+      this.whereQuery = this.whereQuery + "AND";
+    }else {
+      this.whereQuery = ''
     }
-    this.whereQuery += ` ${condition[0]} ${condition[1]} '${condition[2]}'`;
+    this.whereQuery = this.whereQuery + `${condition[0]} ${condition[1]} '${condition[2]}'`;
     return this;
   }
 
@@ -71,7 +70,10 @@ export class baseService {
   }
 
   async get(): Promise<any> {
-    this.whereQuery = "";
+    if (this.whereQuery) this.whereQuery = `WHERE ${this.whereQuery}`;
+    else {
+      this.whereQuery = "";
+    }
     const finalQuery = `SELECT ${this.selectParams} FROM ${this.tablename} ${this.whereQuery}`;
     return await new Promise((resolve, reject) => {
       this.connection.query(finalQuery, (error, result) => {

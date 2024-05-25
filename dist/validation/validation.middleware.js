@@ -17,11 +17,21 @@ let ValidationMiddleware = class ValidationMiddleware {
     constructor() {
         this.ajv = new ajv_1.default({ allErrors: true });
         this.validate = {
-            "/user/signup": this.ajv.compile(schemas_1.signup),
-            "/user/login": this.ajv.compile(schemas_1.login),
-            "/user/logout": this.ajv.compile(schemas_1.nothing),
-            "/user/getInfo": this.ajv.compile(schemas_1.nothing),
-            "/user/updateInfo": this.ajv.compile(schemas_1.updateInfo),
+            "/user/signup": {
+                "POST": async () => schemas_1.signup
+            },
+            "/user/login": {
+                "PUT": async () => schemas_1.login
+            },
+            "/user/logout": {
+                "PUT": async () => schemas_1.nothing
+            },
+            "/user/getInfo": {
+                "GET": async () => schemas_1.nothing
+            },
+            "/user/updateInfo": {
+                "POST": async () => schemas_1.updateInfo
+            },
             "/products/products": {
                 "GET": async () => schemas_1.nothing
             },
@@ -82,6 +92,9 @@ let ValidationMiddleware = class ValidationMiddleware {
             throw new Error("body must have product_id");
         }
     }
+    async signupAjv() {
+        let userSchema = Object.assign({}, schemas_1.signup);
+    }
     async getPostProductRequired(body) {
         const categoriesService = new categories_service_1.CategoriesService();
         const fieldsService = new fields_service_1.FieldsService();
@@ -90,7 +103,7 @@ let ValidationMiddleware = class ValidationMiddleware {
         return result[0];
     }
     convertStringToArray(inputString) {
-        return inputString.replaceAll('\n', '').replaceAll('[', '').replaceAll(']', '').replaceAll("'", "").replaceAll("\r", "").split(",");
+        return inputString.replaceAll("\n", "").replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").replaceAll("\r", "").split(",");
     }
 };
 exports.ValidationMiddleware = ValidationMiddleware;

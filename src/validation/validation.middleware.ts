@@ -10,11 +10,21 @@ export class ValidationMiddleware implements NestMiddleware {
 
   private ajv = new Ajv({ allErrors: true });
   private validate: object = {
-    "/user/signup": this.ajv.compile(signup),
-    "/user/login": this.ajv.compile(login),
-    "/user/logout": this.ajv.compile(nothing),
-    "/user/getInfo": this.ajv.compile(nothing),
-    "/user/updateInfo": this.ajv.compile(updateInfo),
+    "/user/signup": {
+      "POST": async () => signup
+    },
+    "/user/login": {
+      "PUT":async () => login
+    },
+    "/user/logout": {
+      "PUT": async () => nothing
+    },
+    "/user/getInfo": {
+      "GET": async () => nothing
+    },
+    "/user/updateInfo":{
+      "POST": async () => updateInfo
+    },
     "/products/products": {
       "GET": async () => nothing
     },
@@ -42,15 +52,13 @@ export class ValidationMiddleware implements NestMiddleware {
       } catch (e) {
         res.status(409).json(ResponseService.setMeta({ message: e.message || e }));
       }
-
       if (valid(req.body)) {
         next();
       } else {
         res.status(409).json(ResponseService.setMeta(valid.errors));
       }
-
     } else {
-      res.status(409).json(ResponseService.setMeta({ message: "queryParams must be null" }))
+      res.status(409).json(ResponseService.setMeta({ message: "queryParams must be null" }));
     }
   }
 
@@ -78,10 +86,15 @@ export class ValidationMiddleware implements NestMiddleware {
     }
   }
 
+  async signupAjv() {
+    let userSchema = Object.assign({}, signup);
+
+  }
+
   async getPostProductRequired(body: object) {
     const categoriesService = new CategoriesService();
     const fieldsService = new FieldsService();
-    const categoriesResult = await categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`])
+    const categoriesResult = await categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`]);
     const result = await fieldsService.getSpecificRecord("fields", ["fields_id", "=", `${categoriesResult[0]["fields_id"]}`]);
 
     return result[0];
@@ -89,6 +102,6 @@ export class ValidationMiddleware implements NestMiddleware {
 
   convertStringToArray(inputString: string): string[] {
 
-    return inputString.replaceAll('\n', '').replaceAll('[', '').replaceAll(']', '').replaceAll("'", "").replaceAll("\r", "").split(",");
+    return inputString.replaceAll("\n", "").replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").replaceAll("\r", "").split(",");
   }
 }
