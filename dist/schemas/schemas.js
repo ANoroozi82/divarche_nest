@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fields = exports.deleteProduct = exports.nothing = exports.addProduct = exports.signup = exports.updateInfo = exports.login = void 0;
+exports.fields = exports.deleteProduct = exports.nothing = exports.getInfo = exports.addProduct = exports.signup = exports.updateInfo = exports.login = void 0;
 exports.login = {
     "type": "object",
     "properties": {
@@ -83,7 +83,7 @@ exports.addProduct = {
             },
             "required": [],
             "additionalProperties": false
-        },
+        }
     },
     "required": [
         "title",
@@ -95,6 +95,14 @@ exports.addProduct = {
         "address",
         "data"
     ],
+    "additionalProperties": false
+};
+exports.getInfo = {
+    "type": "object",
+    "properties": {
+        "id": { "type": "string" }
+    },
+    "required": ["id"],
     "additionalProperties": false
 };
 exports.nothing = {
@@ -109,7 +117,7 @@ exports.deleteProduct = {
         "product_id": { "type": "string" }
     },
     "required": [
-        "product_id",
+        "product_id"
     ],
     "additionalProperties": false
 };

@@ -31,7 +31,7 @@ export const updateInfo: object = {
 export const signup: object = {
   "type": "object",
   "properties": {
-    "full_name": {"type":"string"},
+    "full_name": { "type": "string" },
     "phone_number": { "type": "string" },
     "city_id": { "type": "string" },
     "role_name": { "type": "string" },
@@ -83,7 +83,7 @@ export const addProduct: object = {
       },
       "required": [],
       "additionalProperties": false
-    },
+    }
   },
   "required": [
     "title",
@@ -97,14 +97,21 @@ export const addProduct: object = {
   ],
   "additionalProperties": false
 };
-
+export const getInfo: object = {
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" }
+  },
+  "required": ["id"],
+  "additionalProperties": false
+};
 
 export const nothing: object = {
   "type": "object",
   "properties": {},
   "required": [],
   "additionalProperties": false
-}
+};
 
 export const deleteProduct: object = {
   "type": "object",
@@ -112,7 +119,7 @@ export const deleteProduct: object = {
     "product_id": { "type": "string" }
   },
   "required": [
-    "product_id",
+    "product_id"
   ],
   "additionalProperties": false
 };
@@ -126,4 +133,4 @@ export const fields: object = {
     "categories_id"
   ],
   "additionalProperties": false
-}
+};

@@ -27,7 +27,7 @@ let ValidationMiddleware = class ValidationMiddleware {
                 "PUT": async () => schemas_1.nothing
             },
             "/user/getInfo": {
-                "GET": async () => schemas_1.nothing
+                "GET": async () => schemas_1.getInfo
             },
             "/user/updateInfo": {
                 "POST": async () => schemas_1.updateInfo

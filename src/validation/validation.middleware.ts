@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { ResponseService } from "../services/response/response.service";
-import { signup, login, updateInfo, nothing, addProduct, fields, deleteProduct } from "../schemas/schemas";
+import { signup, login,getInfo, updateInfo, nothing, addProduct, fields, deleteProduct } from "../schemas/schemas";
 import { CategoriesService } from "../services/categories/categories.service";
 import { FieldsService } from "src/services/fields/fields.service";
 
@@ -20,7 +20,7 @@ export class ValidationMiddleware implements NestMiddleware {
       "PUT": async () => nothing
     },
     "/user/getInfo": {
-      "GET": async () => nothing
+      "GET": async () => getInfo
     },
     "/user/updateInfo":{
       "POST": async () => updateInfo

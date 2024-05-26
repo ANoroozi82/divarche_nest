@@ -17,7 +17,7 @@ import { sessionService } from "../services/session/session.service";
 
 @Controller("user")
 export class UserinfoController {
-  constructor(private readonly userService: UserService,private readonly sessionService:sessionService) {
+  constructor(private readonly userService: UserService, private readonly sessionService: sessionService) {
   }
 
   @Post("signup")
@@ -50,7 +50,6 @@ export class UserinfoController {
   @Put("login")
   async login(@Res() res: Response, @Body() body: object) {
     try {
-
       const userValue = Object.values(body);
       const userData = await this.userService.getSpecificRecord("*", ["username", "=", `${userValue[0]}`]);
       if (userData.length === 0) {
@@ -65,23 +64,20 @@ export class UserinfoController {
             , en: "The password is not correct"
           }));
         } else {
-          let token = await this.sessionService.get()
-          if (token.length === 0){
-            token =  crypto.randomUUID();
-            await this.sessionService.insert('token',`'${token}'`)
+          let token = await this.sessionService.get();
+          if (token.length === 0) {
+            token = crypto.randomUUID();
+            await this.sessionService.insert("token", `'${token}'`);
             return res.status(200).json(ResponseService.setMeta({
               fa: "ورود با موفقیت انجام شد",
               en: "Login was successful"
             }));
-          }else {
-            return res.status(200).json(ResponseService.setMeta({
-            fa: "شما قبلا وارد شدید",
-            en: "You are already logged in"
-          }));
-
+          } else {
+            return res.status(403).json(ResponseService.setMeta({
+              fa: "شما قبلا وارد شدید",
+              en: "You are already logged in"
+            }));
           }
-
-
         }
       }
 
@@ -95,7 +91,19 @@ export class UserinfoController {
   @Put("logout")
   async logout(@Res() res: Response) {
     try {
-      return res.status(200).json(ResponseService.setMeta({ put: "logout" }));
+      let token = await this.sessionService.get();
+      if (token.length===0){
+        return res.status(403).json(ResponseService.setMeta({
+          fa: "شما دستررسی ندارید",
+          en: "access Denied!!!"
+        }));
+      }else {
+        await this.sessionService.deleteSpecificRecord(['token','=',`${token[0].token}`])
+        return res.status(200).json(ResponseService.setMeta({
+          fa:'با موفقیت خارج شدید',
+          en:'You have exited successfully'
+        }));
+      }
     } catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message
@@ -104,9 +112,19 @@ export class UserinfoController {
   }
 
   @Get("getInfo")
-  async getInfo(@Res() res: Response) {
+  async getInfo(@Res() res: Response, @Body() body: object) {
     try {
-      return res.status(200).json(ResponseService.setMeta({ get: "getInfo" }));
+      let token = await this.sessionService.get();
+      if (token.length===0){
+        return res.status(403).json(ResponseService.setMeta({
+          fa: "شما دستررسی ندارید",
+          en: "access Denied!!!"
+        }));
+      }else {
+      const id = Object.values(body);
+      const user = await this.userService.getSpecificRecord("*", ["user_id", "=", id[0]]);
+      return res.status(200).json(ResponseService.setMeta(user));
+      }
     } catch (error) {
       return res.status(409).json(ResponseService.setMeta({
         errors: error.message
