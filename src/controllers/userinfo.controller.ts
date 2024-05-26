@@ -92,16 +92,16 @@ export class UserinfoController {
   async logout(@Res() res: Response) {
     try {
       let token = await this.sessionService.get();
-      if (token.length===0){
+      if (token.length === 0) {
         return res.status(403).json(ResponseService.setMeta({
           fa: "شما دستررسی ندارید",
           en: "access Denied!!!"
         }));
-      }else {
-        await this.sessionService.deleteSpecificRecord(['token','=',`${token[0].token}`])
+      } else {
+        await this.sessionService.deleteSpecificRecord(["token", "=", `${token[0].token}`]);
         return res.status(200).json(ResponseService.setMeta({
-          fa:'با موفقیت خارج شدید',
-          en:'You have exited successfully'
+          fa: "با موفقیت خارج شدید",
+          en: "You have exited successfully"
         }));
       }
     } catch (e) {
@@ -115,15 +115,15 @@ export class UserinfoController {
   async getInfo(@Res() res: Response, @Body() body: object) {
     try {
       let token = await this.sessionService.get();
-      if (token.length===0){
+      if (token.length === 0) {
         return res.status(403).json(ResponseService.setMeta({
           fa: "شما دستررسی ندارید",
           en: "access Denied!!!"
         }));
-      }else {
-      const id = Object.values(body);
-      const user = await this.userService.getSpecificRecord("*", ["user_id", "=", id[0]]);
-      return res.status(200).json(ResponseService.setMeta(user));
+      } else {
+        const id = Object.values(body);
+        const user = await this.userService.getSpecificRecord("*", ["user_id", "=", id[0]]);
+        return res.status(200).json(ResponseService.setMeta(user));
       }
     } catch (error) {
       return res.status(409).json(ResponseService.setMeta({
@@ -134,9 +134,15 @@ export class UserinfoController {
   }
 
   @Post("updateInfo")
-  async updateInfo(@Res() res: Response) {
+  async updateInfo(@Res() res: Response, @Body() body: object) {
     try {
-      return res.status(200).json(ResponseService.setMeta({ post: "updateInfo" }));
+      const userValue = Object.values(body);
+      await this.userService.updateSpecificRecord(`city_id='${userValue[1]}',phone_number='${userValue[2]}'`, ["user_id","=" ,userValue[0]])
+      return res.status(200).json(ResponseService.setMeta({
+        fa:'مشخصات شما به روز شد',
+        en:'updated userInfo'
+        }
+      ));
     } catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message

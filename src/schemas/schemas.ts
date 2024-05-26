@@ -14,9 +14,7 @@ export const login: object = {
 export const updateInfo: object = {
   "type": "object",
   "properties": {
-    "role_name": {
-      "type": "string"
-    },
+    'id':{"type":"string"},
     "city_id": {
       "type": "string"
     },

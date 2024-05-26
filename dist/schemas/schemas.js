@@ -16,9 +16,7 @@ exports.login = {
 exports.updateInfo = {
     "type": "object",
     "properties": {
-        "role_name": {
-            "type": "string"
-        },
+        'id': { "type": "string" },
         "city_id": {
             "type": "string"
         },
