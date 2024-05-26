@@ -5,8 +5,8 @@ export const login: object = {
     "password": { "type": "string" }
   },
   "required": [
-    "user",
-    "pass"
+    "username",
+    "password"
   ],
   "additionalProperties": false
 };

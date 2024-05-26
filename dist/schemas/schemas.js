@@ -8,8 +8,8 @@ exports.login = {
         "password": { "type": "string" }
     },
     "required": [
-        "user",
-        "pass"
+        "username",
+        "password"
     ],
     "additionalProperties": false
 };

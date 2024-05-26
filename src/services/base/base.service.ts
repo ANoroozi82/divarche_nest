@@ -36,11 +36,7 @@ export class baseService {
   }
 
   async insert(KEYS, VALUES): Promise<any> {
-    if (this.whereQuery) this.whereQuery = `WHERE ${this.whereQuery}`;
-    else {
-      this.whereQuery = "";
-    }
-    const finalizer = `INSERT INTO ${this.tablename}(${KEYS}) VALUES(${VALUES}) ${this.whereQuery}`;
+    const finalizer = `INSERT INTO ${this.tablename}(${KEYS}) VALUES(${VALUES})`;
     return await new Promise((resolve, reject) => {
       this.connection.query(finalizer, (error, result) => {
         if (error) {
