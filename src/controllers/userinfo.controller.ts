@@ -129,20 +129,26 @@ export class UserinfoController {
       return res.status(409).json(ResponseService.setMeta({
         errors: error.message
       }));
-
     }
   }
-
   @Post("updateInfo")
   async updateInfo(@Res() res: Response, @Body() body: object) {
     try {
-      const userValue = Object.values(body);
-      await this.userService.updateSpecificRecord(`city_id='${userValue[1]}',phone_number='${userValue[2]}'`, ["user_id","=" ,userValue[0]])
-      return res.status(200).json(ResponseService.setMeta({
-        fa:'مشخصات شما به روز شد',
-        en:'updated userInfo'
-        }
-      ));
+      let token = await this.sessionService.get();
+      if (token.length === 0) {
+        return res.status(403).json(ResponseService.setMeta({
+          fa: "شما دستررسی ندارید",
+          en: "access Denied!!!"
+        }))
+      } else{
+        const userValue = Object.values(body);
+        await this.userService.updateSpecificRecord(`city_id='${userValue[1]}',phone_number='${userValue[2]}'`, ["user_id","=" ,userValue[0]])
+        return res.status(200).json(ResponseService.setMeta({
+            fa:'مشخصات شما به روز شد',
+            en:'updated userInfo'
+          }
+        ));
+      }
     } catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message
