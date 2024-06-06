@@ -26,6 +26,7 @@ export class PostsController {
 
       for (const resultElement of result) {
         resultElement.data = JSON.parse(resultElement.data);
+        resultElement.pathImages = JSON.parse(resultElement.pathImages);
       }
 
       return res.status(200).json(ResponseService.setMeta(result));
