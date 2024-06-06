@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47b7c31f-1245-4753-8ca6-d42b0e391f6b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Button/Button.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Button/Button.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Input/Input.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Input/Input.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/ErrorPage/Error404.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/ErrorPage/Error404.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/ErrorPage/scriptEror.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/HomePage/Home.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/HomePage/Home.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/LoginPage/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/LoginPage/Login.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/SignupPage/Signup.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/SignupPage/Signup.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/SignupPage/Signup.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reportWebVitals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routers/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Button/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button/Button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Input/Input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Input/Input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SignupPage/Signup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SignupPage/Signup.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +34,23 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -59,7 +59,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716731533926</updated>
-      <workItem from="1716731535555" duration="1367000" />
+      <workItem from="1716731535555" duration="2643000" />
+      <workItem from="1717092066365" duration="1316000" />
+      <workItem from="1717111221946" duration="5898000" />
     </task>
     <servers />
   </component>

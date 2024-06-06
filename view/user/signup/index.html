@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>signup</title>
+  <link rel="stylesheet" href="../../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../css/Home.css">
+
+</head>
+<body>
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+              <h2 class="fw-bold mb-2 text-uppercase mb-5">signUp</h2>
+              <select class="form-outline form-white mb-4" id="cityId">
+                <option selected>choose a cityName</option>
+                <option value="1">تهران</option>
+                <option value="2">مشهد</option>
+                <option value="3">تبریز</option>
+                <option value="4">ارومیه</option>
+                <option value="5">اردبیل</option>
+                <option value="6">اصفهان</option>
+                <option value="7">کرج</option>
+                <option value="8">ایلام</option>
+                <option value="9">بوشهر</option>
+                <option value="10">شهرکرد</option>
+                <option value="11">بیرجند</option>
+                <option value="12">بجنورد</option>
+                <option value="13">اهواز</option>
+                <option value="14">زنجان</option>
+                <option value="15">سمنان</option>
+                <option value="16">زاهدان</option>
+                <option value="17">شیراز</option>
+                <option value="18">قزورین</option>
+                <option value="19">قم</option>
+                <option value="20">سنندج</option>
+                <option value="21">کرمانشاه</option>
+                <option value="22">یاسوج</option>
+                <option value="23">گرگان</option>
+                <option value="24">رشت</option>
+                <option value="25">خرم آباد</option>
+              </select>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="typeFullNameX">fullName</label>
+                <input type="text" id="typeFullNameX" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="typePhoneNumberX">PhoneNumber</label>
+                <input type="tel" id="typePhoneNumberX" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="typeUsernameX">userName</label>
+                <input type="text" id="typeUsernameX" class="form-control form-control-lg" />
+              </div>
+
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="typePasswordX">Password</label>
+                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+              </div>
+
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5 mt-5"
+                    id="signup"  type="submit">signup
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="../../js/bootstrap.bundle.min.js"></script>
+<script src="../../js/Home.js"></script>
+<script src="../../js/axios.js"></script>
+</body>
+</html>
