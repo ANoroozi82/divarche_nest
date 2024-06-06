@@ -57,6 +57,7 @@ export const addProduct: object = {
     "categories_id": { "type": "string" },
     "user_id": { "type": "string" },
     "status": { "type": "string" },
+    "pathImages": { "type": "array" },
     "data": {
       "type": "object",
       "properties": {
@@ -91,7 +92,8 @@ export const addProduct: object = {
     "user_id",
     "status",
     "address",
-    "data"
+    "data",
+    "pathImages"
   ],
   "additionalProperties": false
 };

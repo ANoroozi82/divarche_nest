@@ -10,11 +10,12 @@ import { ProductsService } from "./services/products/products.service";
 import { CategoriesService } from "./services/categories/categories.service";
 import { CategoryService } from "./services/category/category.service";
 import { FieldsService } from "./services/fields/fields.service";
+import { ImagesService } from "./services/images/images.service";
 
 @Module({
   imports: [],
   controllers: [AppController, PostsController, UserController],
-  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService]
+  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, ImagesService]
 })
 
 export class AppModule implements NestModule {

@@ -57,6 +57,7 @@ exports.addProduct = {
         "categories_id": { "type": "string" },
         "user_id": { "type": "string" },
         "status": { "type": "string" },
+        "pathImages": { "type": "array" },
         "data": {
             "type": "object",
             "properties": {
@@ -91,7 +92,8 @@ exports.addProduct = {
         "user_id",
         "status",
         "address",
-        "data"
+        "data",
+        "pathImages"
     ],
     "additionalProperties": false
 };

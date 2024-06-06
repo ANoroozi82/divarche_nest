@@ -19,6 +19,7 @@ const products_service_1 = require("./services/products/products.service");
 const categories_service_1 = require("./services/categories/categories.service");
 const category_service_1 = require("./services/category/category.service");
 const fields_service_1 = require("./services/fields/fields.service");
+const images_service_1 = require("./services/images/images.service");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(validation_middleware_1.ValidationMiddleware).forRoutes({ path: "/products/products", method: common_1.RequestMethod.GET }, { path: "/products/product", method: common_1.RequestMethod.POST }, { path: "/products/product", method: common_1.RequestMethod.PUT }, { path: "/products/product", method: common_1.RequestMethod.DELETE }, { path: "/products/fields", method: common_1.RequestMethod.GET }, { path: "/products/category", method: common_1.RequestMethod.GET }, { path: "/products/categories", method: common_1.RequestMethod.GET }, { path: "/user/signup", method: common_1.RequestMethod.POST }, { path: "/user/login", method: common_1.RequestMethod.PUT }, { path: "/user/logout", method: common_1.RequestMethod.PUT }, { path: "/user/getInfo", method: common_1.RequestMethod.GET }, { path: "/user/updateInfo", method: common_1.RequestMethod.POST }, { path: "/user/delete", method: common_1.RequestMethod.DELETE });
@@ -29,7 +30,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
         controllers: [app_controller_1.AppController, posts_controller_1.PostsController, user_controller_1.UserController],
-        providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService, categories_service_1.CategoriesService, fields_service_1.FieldsService, category_service_1.CategoryService]
+        providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService, categories_service_1.CategoriesService, fields_service_1.FieldsService, category_service_1.CategoryService, images_service_1.ImagesService]
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

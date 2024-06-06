@@ -32,6 +32,7 @@ let PostsController = class PostsController {
             const result = await this.productsService.get();
             for (const resultElement of result) {
                 resultElement.data = JSON.parse(resultElement.data);
+                resultElement.pathImages = JSON.parse(resultElement.pathImages);
             }
             return res.status(200).json(response_service_1.ResponseService.setMeta(result));
         }
