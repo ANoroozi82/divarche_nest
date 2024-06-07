@@ -3,7 +3,8 @@ const switchToPageSignUp = document.getElementById("switchPageSignUp");
 const buttonSignup = document.getElementById("signup");
 const buttonLogin = document.getElementById("Login");
 const switchPageLogout = document.getElementById("switchPageLogout");
-const ulTag = document.getElementById('category')
+const divCategory = document.getElementById("category");
+const divProduct = document.getElementById("product");
 if (switchPageLogout) {
   switchPageLogout.addEventListener("click", () => {
     async function putData(url = "", data = {}) {
@@ -110,8 +111,8 @@ if (buttonLogin) {
   });
 }
 
-if (window.location.href=='http://localhost:63342/divarche_nest/view/'){
-  console.log(ulTag);
+if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
+
   async function getData(url = "", data = {}) {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -124,24 +125,126 @@ if (window.location.href=='http://localhost:63342/divarche_nest/view/'){
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url// body data type must match "Content-Type" header
+      referrerPolicy: "no-referrer" // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url// body data type must match "Content-Type" header
     });
     return response.json(); // parses JSON response into native JavaScript objects
   }
 
+  async function DelData(url = "", data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: "Delete", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url// body data type must match "Content-Type" header
+      body: JSON.stringify(data)
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
 
   getData("http://localhost:3030/products/category").then((data) => {
 
-    const category = data.data
+    const category = data.data;
 
-    for (let i = 0; i <category.length ; i++) {
-      const newli = document.createElement('li')
-      newli.id = category[i].category_id
-      newli.innerText = category[i].category_name
-      newli.classList='list-group-item'
-      // newli.addEventListener('click',())
-      ulTag.append(newli)
+    for (let i = 0; i < category.length; i++) {
+      const newul = document.createElement("ul");
+      const newdiv = document.createElement("div");
+      const newBtn = document.createElement("button");
+      newdiv.classList = "dropdown col";
+      newBtn.classList = "btn btn-primary dropdown-toggle";
+      newBtn.innerHTML = category[i].category_name;
+      newBtn.type = "button";
+      newBtn.id = "dropdownMenuButton" + category[i].category_id;
+      newBtn.ariaExpanded = "false";
+      newBtn.setAttribute("data-bs-toggle", "dropdown");
+      newul.id = category[i].category_id;
+      newul.classList = "dropdown-menu";
+      newdiv.append(newBtn);
+      newdiv.append(newul);
+      divCategory.append(newdiv);
+
     }
+    getData("http://localhost:3030/products/categories").then((data) => {
+      const categories = data.data;
+      let uls = document.getElementsByClassName("dropdown-menu");
+      for (let i = 0; i < category.length; i++) {
+        for (let j = 0; j < categories.length; j++) {
+          if (uls[i].id == categories[j].category_id) {
+            const newli = document.createElement("li");
+            const newA = document.createElement("a");
+            newli.id = categories[j].categories_id;
+            newA.innerText = categories[j].categories_name;
+            newA.classList = "dropdown-item";
+            newli.append(newA);
+            uls[i].append(newli);
+          }
+        }
+      }
+    });
+  });
+
+  getData("http://localhost:3030/products/products").then((data) => {
+
+    const products = data.data;
+
+    for (let i = 0; i < products.length; i++) {
+      const newDiv = document.createElement("div");
+      const newImage = document.createElement("img");
+      const cardbody = document.createElement("div");
+      const title = document.createElement("h5");
+      const description = document.createElement("p");
+      const price = document.createElement("h6");
+      const addres = document.createElement("h6");
+      const status = document.createElement("h6");
+      const delbtn = document.createElement("button");
+      const updatebtn = document.createElement("button");
+      newDiv.id = products[i].product_id;
+      newDiv.classList = "card mx-2";
+      newDiv.style = "width: 18rem";
+      newImage.src = "image/1.webp";
+      newImage.classList = "card-img-top";
+      cardbody.classList = "card-body";
+      title.classList = "card-title";
+      title.innerHTML = products[i].title;
+      description.innerHTML = products[i].description;
+      description.classList = "card-text";
+      price.innerHTML = "قیمت:" + products[i].price;
+      price.classList = "card-text";
+      addres.innerHTML = "آدرس:" + products[i].address;
+      addres.classList = "card-text";
+      status.innerHTML = "وضعیت:" + products[i].status;
+      updatebtn.classList = "btn btn-outline-success rounded";
+      updatebtn.innerHTML = "update";
+      delbtn.classList = "btn btn-outline-danger rounded";
+      delbtn.innerHTML = "delete";
+
+      delbtn.addEventListener("click",  (event) => {
+
+        DelData("http://localhost:3030/products/product",{product_id:products[i].product_id}).then((data) => {
+          const divt = document.getElementById(products[i].product_id)
+          divt.remove()
+        });
+      });
+      cardbody.append(updatebtn);
+      cardbody.append(title);
+      cardbody.append(description);
+      cardbody.append(price);
+      cardbody.append(addres);
+      cardbody.append(status);
+      cardbody.append(delbtn);
+      newDiv.append(newImage);
+      newDiv.append(cardbody);
+      divProduct.append(newDiv);
+
+    }
+
+
   });
 
 }
