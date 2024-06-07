@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 17, 2024 at 11:31 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jun 07, 2024 at 11:45 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -186,17 +186,6 @@ INSERT INTO `fields` (`fields_id`, `fields`) VALUES
 (7, '[\n\'حافظه داخلی\',\n\'مقدار رم\',\n\'سیستم عامل\',\n\'پردازنده\',\n\'پردازنده گرافیکی\'\n]'),
 (8, '[\r\n]'),
 (9, '[\r\n\'تعداد روز\'\r\n]');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
-  `path` text NOT NULL,
-  `product_id` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -394,12 +383,6 @@ ALTER TABLE `fields`
   ADD PRIMARY KEY (`fields_id`);
 
 --
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD KEY `FK_1` (`product_id`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -483,12 +466,6 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `city`
   ADD CONSTRAINT `FK_1` FOREIGN KEY (`state_id`) REFERENCES `state` (`state_id`);
-
---
--- Constraints for table `images`
---
-ALTER TABLE `images`
-  ADD CONSTRAINT `FK_7_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Constraints for table `products`
