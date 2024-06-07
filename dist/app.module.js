@@ -29,7 +29,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController, posts_controller_1.PostsController, user_controller_1.UserController],
+        controllers: [app_controller_1.AppController, posts_controller_1.PostsController, userinfo_controller_1.UserinfoController],
         providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService, categories_service_1.CategoriesService, fields_service_1.FieldsService, category_service_1.CategoryService, images_service_1.ImagesService]
     })
 ], AppModule);

@@ -70,8 +70,7 @@ let baseService = class baseService {
         });
     }
     async get() {
-
-        const finalQuery = `SELECT ${this.selectParams} FROM ${this.tablename}`;
+        const finalQuery = `SELECT ${this.selectParams} FROM ${this.tablename} `;
         return await new Promise((resolve, reject) => {
             this.connection.query(finalQuery, (error, result) => {
                 if (error) {
