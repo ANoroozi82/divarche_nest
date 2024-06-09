@@ -22,11 +22,56 @@
     <div class="row" id="category">
     </div>
     <div class="row mt-5 " id="product">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-outline-success w-25 h-25 rounded mx-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    +
+      </button>
 
-
-
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">create product</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="title">title</label>
+                <input type="text" id="title" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="description">description</label>
+                <input type="text" id="description" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="price">price</label>
+                <input type="text" id="price" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="address">address</label>
+                <input type="text" id="address" class="form-control form-control-lg" />
+              </div>
+              <div data-mdb-input-init class="form-outline form-white mb-4">
+                <label class="form-label" for="status">status</label>
+                <input type="text" id="status" class="form-control form-control-lg" />
+              </div>
+              <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">upload images</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">create</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+
 </section>
 
 <script src="js/bootstrap.bundle.min.js"></script>

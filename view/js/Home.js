@@ -5,6 +5,7 @@ const buttonLogin = document.getElementById("Login");
 const switchPageLogout = document.getElementById("switchPageLogout");
 const divCategory = document.getElementById("category");
 const divProduct = document.getElementById("product");
+const addProduct = document.getElementById('addProduct')
 if (switchPageLogout) {
   switchPageLogout.addEventListener("click", () => {
     async function putData(url = "", data = {}) {
@@ -204,6 +205,8 @@ if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
       const status = document.createElement("h6");
       const delbtn = document.createElement("button");
       const updatebtn = document.createElement("button");
+
+      const col = document.createElement("div");
       newDiv.id = products[i].product_id;
       newDiv.classList = "card mx-2";
       newDiv.style = "width: 18rem";
@@ -219,25 +222,28 @@ if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
       addres.innerHTML = "آدرس:" + products[i].address;
       addres.classList = "card-text";
       status.innerHTML = "وضعیت:" + products[i].status;
-      updatebtn.classList = "btn btn-outline-success rounded";
+      col.classList = "col";
+      updatebtn.classList = "btn btn-outline-warning rounded";
       updatebtn.innerHTML = "update";
       delbtn.classList = "btn btn-outline-danger rounded";
       delbtn.innerHTML = "delete";
 
-      delbtn.addEventListener("click",  (event) => {
+      delbtn.addEventListener("click", (event) => {
 
-        DelData("http://localhost:3030/products/product",{product_id:products[i].product_id}).then((data) => {
-          const divt = document.getElementById(products[i].product_id)
-          divt.remove()
+        DelData("http://localhost:3030/products/product", { product_id: products[i].product_id }).then((data) => {
+          const divt = document.getElementById(products[i].product_id);
+          divt.remove();
         });
       });
-      cardbody.append(updatebtn);
+
       cardbody.append(title);
       cardbody.append(description);
       cardbody.append(price);
       cardbody.append(addres);
       cardbody.append(status);
-      cardbody.append(delbtn);
+      col.append(updatebtn);
+      col.append(delbtn);
+      cardbody.append(col);
       newDiv.append(newImage);
       newDiv.append(cardbody);
       divProduct.append(newDiv);
@@ -247,4 +253,9 @@ if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
 
   });
 
+}
+if(addProduct){
+  addProduct.addEventListener('click',()=>{
+
+  })
 }

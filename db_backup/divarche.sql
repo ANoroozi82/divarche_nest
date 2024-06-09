@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2024 at 11:45 AM
+-- Generation Time: Jun 07, 2024 at 12:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -201,6 +201,7 @@ CREATE TABLE `products` (
   `address` text NOT NULL,
   `status` varchar(25) NOT NULL,
   `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`data`)),
+  `pathImages` text NOT NULL,
   `user_id` varchar(15) NOT NULL,
   `categories_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -209,10 +210,8 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `title`, `description`, `price`, `address`, `status`, `data`, `user_id`, `categories_id`) VALUES
-('2P2FyyAX5', 'سامسونگ M11', 'گوشی دست دوم هست و بدون هیچ مشکلی', '2500000', 'سیدی، اصلانی 62', 'دست دوم', '{\"مدل\":\"A55\",\"برند\":\"سامسونگ\"}', '1', 4),
-('aGifszL5X', 'کفش', 'گوشی دست دوم هست و بدون هیچ مشکلی', '2500000', 'سیدی، اصلانی 62', 'نو', '{\"برند\":\"سامسونگ\"}', '1', 6),
-('o8xf0JGpj', 'پژو 405SLX', 'ماشین خواب بوده', '400000000', 'سیدی، اصلانی 62', 'کارکرده', '{\"سال تولید\":\"1395\",\"برند\":\"پژو\",\"رنگ\":\"نقره ای\",\"وضعیت شاسی\":\"سالم\",\"نوع سوخت\":\"بنزین\",\"گیربکس\":\"دنده ای\",\"بیمه\":\"6 ماه\",\"مدل\":\"405SLX\"}', '1', 4);
+INSERT INTO `products` (`product_id`, `title`, `description`, `price`, `address`, `status`, `data`, `pathImages`, `user_id`, `categories_id`) VALUES
+('Mm0bmBD54', 'پژو 405SLX', 'ماشین خواب بوده', '400000000', 'سیدی، اصلانی 62', 'کارکرده', '{\"سال تولید\":\"1395\",\"برند\":\"پژو\",\"رنگ\":\"نقره ای\",\"وضعیت شاسی\":\"سالم\",\"نوع سوخت\":\"بنزین\",\"گیربکس\":\"دنده ای\",\"بیمه\":\"6 ماه\",\"مدل\":\"405SLX\"}', '[\"src/Hi\",\"src/Hello\"]', '1', 4);
 
 -- --------------------------------------------------------
 
