@@ -20,21 +20,32 @@ const ShortID = require("shortid");
 const category_service_1 = require("../services/category/category.service");
 const fields_service_1 = require("../services/fields/fields.service");
 const categories_service_1 = require("../services/categories/categories.service");
+const session_service_1 = require("../services/session/session.service");
 let PostsController = class PostsController {
-    constructor(productsService, categoryService, fieldsService, categoriesService) {
+    constructor(productsService, categoryService, fieldsService, categoriesService, sessionService) {
         this.productsService = productsService;
         this.categoryService = categoryService;
         this.fieldsService = fieldsService;
         this.categoriesService = categoriesService;
+        this.sessionService = sessionService;
     }
     async getPosts(res) {
         try {
-            const result = await this.productsService.get();
-            for (const resultElement of result) {
-                resultElement.data = JSON.parse(resultElement.data);
-                resultElement.pathImages = JSON.parse(resultElement.pathImages);
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
             }
-            return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            else {
+                const result = await this.productsService.get();
+                for (const resultElement of result) {
+                    resultElement.data = JSON.parse(resultElement.data);
+                    resultElement.pathImages = JSON.parse(resultElement.pathImages);
+                }
+                return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -44,20 +55,29 @@ let PostsController = class PostsController {
     }
     async createPost(body, res) {
         try {
-            const keys = Object.keys(body);
-            keys.push("product_id");
-            const values = Object.values(body);
-            values.forEach((value, index) => {
-                if (typeof value === "object") {
-                    values[index] = JSON.stringify(value);
-                }
-            });
-            values.push(ShortID.generate());
-            const valuesString = values.map(this.ensureQuoted);
-            const post = await this.productsService.insert(keys, valuesString);
-            return res.status(200).json(response_service_1.ResponseService.setMeta({
-                message: post === 1 ? "Success" : post
-            }));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
+            }
+            else {
+                const keys = Object.keys(body);
+                keys.push("product_id");
+                const values = Object.values(body);
+                values.forEach((value, index) => {
+                    if (typeof value === "object") {
+                        values[index] = JSON.stringify(value);
+                    }
+                });
+                values.push(ShortID.generate());
+                const valuesString = values.map(this.ensureQuoted);
+                const post = await this.productsService.insert(keys, valuesString);
+                return res.status(200).json(response_service_1.ResponseService.setMeta({
+                    message: post === 1 ? "Success" : post
+                }));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -67,10 +87,19 @@ let PostsController = class PostsController {
     }
     async deleteProduct(body, res) {
         try {
-            const result = await this.productsService.deleteSpecificRecord(["product_id", "=", `${body["product_id"]}`]);
-            return res.status(result["affectedRows"] === 1 ? 200 : 409).json(response_service_1.ResponseService.setMeta({
-                message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record deleted` : `product '${body["product_id"]}' not found!!`
-            }));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
+            }
+            else {
+                const result = await this.productsService.deleteSpecificRecord(["product_id", "=", `${body["product_id"]}`]);
+                return res.status(result["affectedRows"] === 1 ? 200 : 409).json(response_service_1.ResponseService.setMeta({
+                    message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record deleted` : `product '${body["product_id"]}' not found!!`
+                }));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -80,11 +109,20 @@ let PostsController = class PostsController {
     }
     async updateProduct(body, res) {
         try {
-            body["data"] = JSON.stringify(body["data"]);
-            const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body), ["product_id", "=", `${body["product_id"]}`]);
-            return res.status(result["affectedRows"] === 1 ? 200 : 409).json(response_service_1.ResponseService.setMeta({
-                message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record updated` : `product '${body["product_id"]}' not found!!`
-            }));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
+            }
+            else {
+                body["data"] = JSON.stringify(body["data"]);
+                const result = await this.productsService.updateSpecificRecord(this.buildUpdateValues(body), ["product_id", "=", `${body["product_id"]}`]);
+                return res.status(result["affectedRows"] === 1 ? 200 : 409).json(response_service_1.ResponseService.setMeta({
+                    message: result["affectedRows"] === 1 ? `${result["affectedRows"]} record updated` : `product '${body["product_id"]}' not found!!`
+                }));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -94,15 +132,24 @@ let PostsController = class PostsController {
     }
     async getFields(body, res) {
         try {
-            const categories_id = await this.categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`]);
-            if (categories_id.length !== 0) {
-                const result = await this.fieldsService.getSpecificRecord(null, ["fields_id", "=", `${categories_id[0]["fields_id"]}`]);
-                return res.status(200).json(response_service_1.ResponseService.setMeta(this.buildArray(result[0]["fields"])));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
             }
             else {
-                return res.status(409).json(response_service_1.ResponseService.setMeta({
-                    errors: `categories_id '${body["categories_id"]}' not found!!`
-                }));
+                const categories_id = await this.categoriesService.getSpecificRecord("fields_id", ["categories_id", "=", `${body["categories_id"]}`]);
+                if (categories_id.length !== 0) {
+                    const result = await this.fieldsService.getSpecificRecord(null, ["fields_id", "=", `${categories_id[0]["fields_id"]}`]);
+                    return res.status(200).json(response_service_1.ResponseService.setMeta(this.buildArray(result[0]["fields"])));
+                }
+                else {
+                    return res.status(409).json(response_service_1.ResponseService.setMeta({
+                        errors: `categories_id '${body["categories_id"]}' not found!!`
+                    }));
+                }
             }
         }
         catch (e) {
@@ -113,8 +160,17 @@ let PostsController = class PostsController {
     }
     async getCategory(res) {
         try {
-            const result = await this.categoryService.get();
-            return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
+            }
+            else {
+                const result = await this.categoryService.get();
+                return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -124,8 +180,17 @@ let PostsController = class PostsController {
     }
     async getCategories(res) {
         try {
-            const result = await this.categoriesService.get();
-            return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            let token = await this.sessionService.get();
+            if (token.length === 0) {
+                return res.status(403).json(response_service_1.ResponseService.setMeta({
+                    fa: "شما دستررسی ندارید",
+                    en: "access Denied!!!"
+                }));
+            }
+            else {
+                const result = await this.categoriesService.get();
+                return res.status(200).json(response_service_1.ResponseService.setMeta(result));
+            }
         }
         catch (e) {
             return res.status(500).json(response_service_1.ResponseService.setMeta({
@@ -216,6 +281,7 @@ exports.PostsController = PostsController = __decorate([
     __metadata("design:paramtypes", [products_service_1.ProductsService,
         category_service_1.CategoryService,
         fields_service_1.FieldsService,
-        categories_service_1.CategoriesService])
+        categories_service_1.CategoriesService,
+        session_service_1.sessionService])
 ], PostsController);
 //# sourceMappingURL=posts.controller.js.map

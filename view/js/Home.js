@@ -5,7 +5,7 @@ const buttonLogin = document.getElementById("Login");
 const switchPageLogout = document.getElementById("switchPageLogout");
 const divCategory = document.getElementById("category");
 const divProduct = document.getElementById("product");
-const addProduct = document.getElementById('addProduct')
+const addProduct = document.getElementById('create')
 if (switchPageLogout) {
   switchPageLogout.addEventListener("click", () => {
     async function putData(url = "", data = {}) {
@@ -210,6 +210,7 @@ if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
       newDiv.id = products[i].product_id;
       newDiv.classList = "card mx-2";
       newDiv.style = "width: 18rem";
+      console.log(products.pathImages);
       newImage.src = "image/1.webp";
       newImage.classList = "card-img-top";
       cardbody.classList = "card-body";
@@ -256,6 +257,53 @@ if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
 }
 if(addProduct){
   addProduct.addEventListener('click',()=>{
+    async function postData(url = "", data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json"
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url// body data type must match "Content-Type" header
+        body:JSON.stringify(data)
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
+    const title =document.getElementById('title')
+    const description =document.getElementById('description')
+    const price =document.getElementById('price')
+    const address = document.getElementById('address')
+    const status = document.getElementById('status')
+    const formFileMultiple =document.getElementById('formFileMultiple')
+    const categoryChoose = document.getElementById('categoryChoose')
+
+    postData('http://localhost:3030/products/product',{
+      "title": title.value,
+      "description": description.value,
+      "price": price.value,
+      "address": address.value,
+      "status": status.value,
+      "data": {
+        "سال تولید": "1395",
+        "برند": "پژو",
+        "رنگ": "نقره ای",
+        "وضعیت شاسی": "سالم",
+        "نوع سوخت": "بنزین",
+        "گیربکس": "دنده ای",
+        "بیمه": "6 ماه",
+        "مدل": "405SLX"
+      },
+      "user_id": "1",
+      "pathImages":[formFileMultiple.value],
+      "categories_id": categoryChoose.value
+    }).then((data)=>{
+      alert(JSON.stringify(data.data))
+    })
 
   })
 }
