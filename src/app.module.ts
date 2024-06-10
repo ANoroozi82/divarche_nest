@@ -2,8 +2,8 @@ import { Module, NestModule, MiddlewareConsumer, RequestMethod } from "@nestjs/c
 import { ValidationMiddleware } from "./validation/validation.middleware";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { PostsController } from "./posts/posts.controller";
-import { UserinfoController } from "./controllers/userinfo.controller";
+import { PostsController } from "./controllers/posts/posts.controller";
+import { UserinfoController } from "./controllers/userInfo/userinfo.controller";
 import { UserService } from "./services/user/user.service";
 import { ResponseService } from "./services/response/response.service";
 import { ProductsService } from "./services/products/products.service";

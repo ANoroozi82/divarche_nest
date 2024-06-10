@@ -1,13 +1,13 @@
 import { Body, Res, Controller, Delete, Get, Post, Put, Param } from "@nestjs/common";
-import { ResponseService } from "../services/response/response.service";
-import { ProductsService } from "../services/products/products.service";
+import { ResponseService } from "../../services/response/response.service";
+import { ProductsService } from "../../services/products/products.service";
 import { Response } from "express";
 
 import * as  ShortID from "shortid";
-import { CategoryService } from "../services/category/category.service";
-import { FieldsService } from "../services/fields/fields.service";
-import { CategoriesService } from "../services/categories/categories.service";
-import { sessionService } from "../services/session/session.service";
+import { CategoryService } from "../../services/category/category.service";
+import { FieldsService } from "../../services/fields/fields.service";
+import { CategoriesService } from "../../services/categories/categories.service";
+import { sessionService } from "../../services/session/session.service";
 
 @Controller("products")
 export class PostsController {

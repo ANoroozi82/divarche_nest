@@ -8,11 +8,11 @@ import {
   Body,
   NotFoundException, Res
 } from "@nestjs/common";
-import { UserService } from "../services/user/user.service";
+import { UserService } from "../../services/user/user.service";
 import { Response } from "express";
-import { ResponseService } from "../services/response/response.service";
+import { ResponseService } from "../../services/response/response.service";
 import { uuid } from "uuidv4";
-import { sessionService } from "../services/session/session.service";
+import { sessionService } from "../../services/session/session.service";
 
 
 @Controller("user")

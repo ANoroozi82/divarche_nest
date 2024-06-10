@@ -107,12 +107,13 @@ if (buttonLogin) {
       "username": `${userName.value}`,
       "password": `${password.value}`
     }).then((data) => {
-      alert(JSON.stringify(data.data)); // JSON data parsed by `data.json()` call
+      alert(JSON.stringify(data.data));
+      window.location.href == "http://localhost:63342/view/" // JSON data parsed by `data.json()` call
     });
   });
 }
 
-if (window.location.href == "http://localhost:63342/divarche_nest/view/") {
+if (window.location.href == "http://localhost:63342/view/") {
 
   async function getData(url = "", data = {}) {
     // Default options are marked with *
