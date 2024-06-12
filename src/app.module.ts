@@ -11,11 +11,16 @@ import { CategoriesService } from "./services/categories/categories.service";
 import { CategoryService } from "./services/category/category.service";
 import { FieldsService } from "./services/fields/fields.service";
 import { sessionService } from "./services/session/session.service";
+import { APP_GUARD } from "@nestjs/core";
+import { RolesGuard } from "./roles/roles.gaurd";
 
 @Module({
   imports: [],
   controllers: [AppController, PostsController, UserinfoController],
-  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService]
+  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService, {
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  },]
 })
 
 export class AppModule implements NestModule {

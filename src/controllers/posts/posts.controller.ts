@@ -8,6 +8,8 @@ import { CategoryService } from "../../services/category/category.service";
 import { FieldsService } from "../../services/fields/fields.service";
 import { CategoriesService } from "../../services/categories/categories.service";
 import { sessionService } from "../../services/session/session.service";
+import { Roles } from "src/roles/roles.decorator";
+import { Role } from "../../roles/roles.enum";
 
 @Controller("products")
 export class PostsController {
@@ -21,6 +23,7 @@ export class PostsController {
   ) {
   }
 
+  @Roles(Role.Admin)
   @Get("products")
   async getPosts(@Res() res: Response) {
     try {
