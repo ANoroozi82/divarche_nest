@@ -2,7 +2,7 @@ import { Module, NestModule, MiddlewareConsumer, RequestMethod } from "@nestjs/c
 import { ValidationMiddleware } from "./validation/validation.middleware";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { PostsController } from "./controllers/posts/posts.controller";
+import { PostsController } from "./controllers/products/products.controller";
 import { UserinfoController } from "./controllers/userInfo/userinfo.controller";
 import { UserService } from "./services/user/user.service";
 import { ResponseService } from "./services/response/response.service";
@@ -11,11 +11,16 @@ import { CategoriesService } from "./services/categories/categories.service";
 import { CategoryService } from "./services/category/category.service";
 import { FieldsService } from "./services/fields/fields.service";
 import { sessionService } from "./services/session/session.service";
+import { APP_GUARD } from "@nestjs/core";
+import { RolesGuard } from "./roles/roles.gaurd";
 
 @Module({
   imports: [],
   controllers: [AppController, PostsController, UserinfoController],
-  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService]
+  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService, {
+    provide: APP_GUARD,
+    useClass: RolesGuard,
+  },]
 })
 
 export class AppModule implements NestModule {

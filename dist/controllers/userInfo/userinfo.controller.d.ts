@@ -1,6 +1,6 @@
-import { UserService } from "../services/user/user.service";
+import { UserService } from "../../services/user/user.service";
 import { Response } from "express";
-import { sessionService } from "../services/session/session.service";
+import { sessionService } from "../../services/session/session.service";
 export declare class UserinfoController {
     private readonly userService;
     private readonly sessionService;

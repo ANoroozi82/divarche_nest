@@ -1,9 +1,9 @@
-import { ProductsService } from "../services/products/products.service";
+import { ProductsService } from "../../services/products/products.service";
 import { Response } from "express";
-import { CategoryService } from "../services/category/category.service";
-import { FieldsService } from "../services/fields/fields.service";
-import { CategoriesService } from "../services/categories/categories.service";
-import { sessionService } from "../services/session/session.service";
+import { CategoryService } from "../../services/category/category.service";
+import { FieldsService } from "../../services/fields/fields.service";
+import { CategoriesService } from "../../services/categories/categories.service";
+import { sessionService } from "../../services/session/session.service";
 export declare class PostsController {
     private productsService;
     private categoryService;

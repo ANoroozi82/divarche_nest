@@ -14,13 +14,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsController = void 0;
 const common_1 = require("@nestjs/common");
-const response_service_1 = require("../services/response/response.service");
-const products_service_1 = require("../services/products/products.service");
+const response_service_1 = require("../../services/response/response.service");
+const products_service_1 = require("../../services/products/products.service");
 const ShortID = require("shortid");
-const category_service_1 = require("../services/category/category.service");
-const fields_service_1 = require("../services/fields/fields.service");
-const categories_service_1 = require("../services/categories/categories.service");
-const session_service_1 = require("../services/session/session.service");
+const category_service_1 = require("../../services/category/category.service");
+const fields_service_1 = require("../../services/fields/fields.service");
+const categories_service_1 = require("../../services/categories/categories.service");
+const session_service_1 = require("../../services/session/session.service");
+const roles_decorator_1 = require("../../roles/roles.decorator");
+const roles_enum_1 = require("../../roles/roles.enum");
 let PostsController = class PostsController {
     constructor(productsService, categoryService, fieldsService, categoriesService, sessionService) {
         this.productsService = productsService;
@@ -224,6 +226,7 @@ let PostsController = class PostsController {
 };
 exports.PostsController = PostsController;
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Get)("products"),
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -231,6 +234,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "getPosts", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Post)("product"),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
@@ -239,6 +243,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "createPost", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Delete)("product"),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
@@ -247,6 +252,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "deleteProduct", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Put)("product"),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
@@ -255,6 +261,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "updateProduct", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Get)("fields"),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
@@ -263,6 +270,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "getFields", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin, roles_enum_1.Role.User),
     (0, common_1.Get)("category"),
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -270,6 +278,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "getCategory", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin, roles_enum_1.Role.User),
     (0, common_1.Get)("categories"),
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -284,4 +293,4 @@ exports.PostsController = PostsController = __decorate([
         categories_service_1.CategoriesService,
         session_service_1.sessionService])
 ], PostsController);
-//# sourceMappingURL=posts.controller.js.map
+//# sourceMappingURL=products.controller.js.map
