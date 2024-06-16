@@ -24,6 +24,7 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "ajv": "^8.13.0",
+    "cookie-parser": "^1.4.6",
     "jalali-moment": "^3.3.11",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",

@@ -2,13 +2,12 @@ import { Body, Res, Controller, Delete, Get, Post, Put, Param } from "@nestjs/co
 import { ResponseService } from "../../services/response/response.service";
 import { ProductsService } from "../../services/products/products.service";
 import { Response } from "express";
-
 import * as  ShortID from "shortid";
 import { CategoryService } from "../../services/category/category.service";
 import { FieldsService } from "../../services/fields/fields.service";
 import { CategoriesService } from "../../services/categories/categories.service";
 import { sessionService } from "../../services/session/session.service";
-import { Roles } from "src/roles/roles.decorator";
+import { RolesGuard } from "src/roles/roles.decorator";
 import { Role } from "../../roles/roles.enum";
 
 @Controller("products")
@@ -23,7 +22,7 @@ export class PostsController {
   ) {
   }
 
-  @Roles(Role.Admin)
+  @RolesGuard(Role.Admin)
   @Get("products")
   async getPosts(@Res() res: Response) {
     try {
@@ -48,6 +47,8 @@ export class PostsController {
     }
   }
 
+
+  @RolesGuard(Role.Admin)
   @Post("product")
   async createPost(@Body() body: object, @Res() res: Response) {
     try {
@@ -80,6 +81,7 @@ export class PostsController {
     }
   }
 
+  @RolesGuard(Role.Admin)
   @Delete("product")
   async deleteProduct(@Body() body: object, @Res() res: Response) {
     try {
@@ -102,6 +104,7 @@ export class PostsController {
     }
   }
 
+  @RolesGuard(Role.Admin)
   @Put("product")
   async updateProduct(@Body() body: object, @Res() res: Response) {
     try {
@@ -126,6 +129,7 @@ export class PostsController {
     }
   }
 
+  @RolesGuard(Role.Admin)
   @Get("fields")
   async getFields(@Body() body: object, @Res() res: Response) {
     try {
@@ -153,6 +157,7 @@ export class PostsController {
     }
   }
 
+  @RolesGuard(Role.Admin, Role.User)
   @Get("category")
   async getCategory(@Res() res: Response) {
     try {
@@ -173,6 +178,7 @@ export class PostsController {
     }
   }
 
+  @RolesGuard(Role.Admin, Role.User)
   @Get("categories")
   async getCategories(@Res() res: Response) {
     try {let token = await this.sessionService.get();

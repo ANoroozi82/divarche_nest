@@ -13,6 +13,8 @@ import { Response } from "express";
 import { ResponseService } from "../../services/response/response.service";
 import { uuid } from "uuidv4";
 import { sessionService } from "../../services/session/session.service";
+import { RolesGuard } from "src/roles/roles.decorator";
+import { Role } from "src/roles/roles.enum";
 
 
 @Controller("user")
@@ -20,6 +22,7 @@ export class UserinfoController {
   constructor(private readonly userService: UserService, private readonly sessionService: sessionService) {
   }
 
+  @RolesGuard(Role.User)
   @Post("signup")
   async signup(@Res() res: Response, @Body() body: object) {
     try {
@@ -47,6 +50,7 @@ export class UserinfoController {
     }
   }
 
+  @RolesGuard(Role.User)
   @Put("login")
   async login(@Res() res: Response, @Body() body: object) {
     try {
@@ -88,6 +92,7 @@ export class UserinfoController {
     }
   }
 
+  @RolesGuard(Role.Admin)
   @Put("logout")
   async logout(@Res() res: Response) {
     try {
@@ -111,6 +116,7 @@ export class UserinfoController {
     }
   }
 
+  @RolesGuard(Role.Admin)
   @Get("getInfo")
   async getInfo(@Res() res: Response, @Body() body: object) {
     try {
@@ -131,6 +137,8 @@ export class UserinfoController {
       }));
     }
   }
+
+  @RolesGuard(Role.Admin)
   @Post("updateInfo")
   async updateInfo(@Res() res: Response, @Body() body: object) {
     try {

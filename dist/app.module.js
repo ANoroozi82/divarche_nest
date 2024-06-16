@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const validation_middleware_1 = require("./validation/validation.middleware");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const posts_controller_1 = require("./controllers/posts/posts.controller");
+const products_controller_1 = require("./controllers/products/products.controller");
 const userinfo_controller_1 = require("./controllers/userInfo/userinfo.controller");
 const user_service_1 = require("./services/user/user.service");
 const response_service_1 = require("./services/response/response.service");
@@ -31,7 +31,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController, posts_controller_1.PostsController, userinfo_controller_1.UserinfoController],
+        controllers: [app_controller_1.AppController, products_controller_1.PostsController, userinfo_controller_1.UserinfoController],
         providers: [app_service_1.AppService, user_service_1.UserService, response_service_1.ResponseService, products_service_1.ProductsService, categories_service_1.CategoriesService, fields_service_1.FieldsService, category_service_1.CategoryService, session_service_1.sessionService, {
                 provide: core_1.APP_GUARD,
                 useClass: roles_gaurd_1.RolesGuard,

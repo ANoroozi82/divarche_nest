@@ -18,6 +18,8 @@ const user_service_1 = require("../../services/user/user.service");
 const response_service_1 = require("../../services/response/response.service");
 const uuidv4_1 = require("uuidv4");
 const session_service_1 = require("../../services/session/session.service");
+const roles_decorator_1 = require("../../roles/roles.decorator");
+const roles_enum_1 = require("../../roles/roles.enum");
 let UserinfoController = class UserinfoController {
     constructor(userService, sessionService) {
         this.userService = userService;
@@ -162,6 +164,7 @@ let UserinfoController = class UserinfoController {
 };
 exports.UserinfoController = UserinfoController;
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.User),
     (0, common_1.Post)("signup"),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
@@ -170,6 +173,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserinfoController.prototype, "signup", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.User),
     (0, common_1.Put)("login"),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
@@ -178,6 +182,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserinfoController.prototype, "login", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Put)("logout"),
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
@@ -185,6 +190,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserinfoController.prototype, "logout", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Get)("getInfo"),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
@@ -193,6 +199,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserinfoController.prototype, "getInfo", null);
 __decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Post)("updateInfo"),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),

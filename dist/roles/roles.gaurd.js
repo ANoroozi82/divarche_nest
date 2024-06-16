@@ -11,13 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
+const session_service_1 = require("../services/session/session.service");
 const core_1 = require("@nestjs/core");
 const roles_decorator_1 = require("./roles.decorator");
 let RolesGuard = class RolesGuard {
-    constructor(reflector) {
+    constructor(reflector, sessionService) {
         this.reflector = reflector;
+        this.sessionService = sessionService;
     }
-    canActivate(context) {
+    async canActivate(context) {
         const requiredRoles = this.reflector.getAllAndOverride(roles_decorator_1.ROLES_KEY, [
             context.getHandler(),
             context.getClass(),
@@ -25,13 +27,20 @@ let RolesGuard = class RolesGuard {
         if (!requiredRoles) {
             return true;
         }
-        const { user } = context.switchToHttp().getRequest();
-        return requiredRoles.some((role) => user.roles?.includes(role));
+        try {
+            const request = context.switchToHttp().getRequest();
+            const result = await this.sessionService.getSpecificRecord('info', ['token', '=', request['cookies']['token']]);
+            const json = JSON.parse(result[0]['info']);
+            return requiredRoles.some((role) => json.role.includes(role));
+        }
+        catch (err) {
+            return requiredRoles.some((role) => 'user'.includes(role));
+        }
     }
 };
 exports.RolesGuard = RolesGuard;
 exports.RolesGuard = RolesGuard = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [core_1.Reflector])
+    __metadata("design:paramtypes", [core_1.Reflector, session_service_1.sessionService])
 ], RolesGuard);
 //# sourceMappingURL=roles.gaurd.js.map
