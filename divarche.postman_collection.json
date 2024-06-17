@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "e7db10e3-4ce7-4b26-a1dc-17c02e5dc594",
+		"name": "divarche",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31677429"
+	},
+	"item": [
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3030/products/products",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categories_id\" : \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3030/products/fields",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"fields"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"پژو 405SLX\",\r\n    \"description\": \"ماشین خواب بوده\",\r\n    \"price\": \"400000000\",\r\n    \"address\": \"سیدی، اصلانی 62\",\r\n    \"status\": \"کارکرده\",\r\n    \"data\": {\r\n        \"سال تولید\": \"1395\",\r\n        \"برند\": \"پژو\",\r\n        \"رنگ\": \"نقره ای\",\r\n        \"وضعیت شاسی\": \"سالم\",\r\n        \"نوع سوخت\": \"بنزین\",\r\n        \"گیربکس\": \"دنده ای\",\r\n        \"بیمه\": \"6 ماه\",\r\n        \"مدل\": \"405SLX\"\r\n    },\r\n    \"pathImages\": [\r\n        \"src/Hi\",\r\n        \"src/Hello\"\r\n    ],\r\n    \"user_id\": \"1\",\r\n    \"categories_id\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3030/products/product",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3030/products/category",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"category"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "amir",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3030/products/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\" : \"2ZL9mXjDi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3030/products/product",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"products",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\" : \"2ZL9mXjDi\",\r\n    \"title\": \"پژو 405SLX\",\r\n    \"description\": \"ماشین خواب بوده\",\r\n    \"price\": \"400000000\",\r\n    \"address\": \"سیدی، اصلانی 62\",\r\n    \"status\": \"نو\",\r\n    \"data\": {\r\n        \"سال تولید\": \"1395\",\r\n        \"برند\": \"پژو\",\r\n        \"رنگ\": \"نقره ای\",\r\n        \"وضعیت شاسی\": \"سالم\",\r\n        \"نوع سوخت\": \"بنزین\",\r\n        \"گیربکس\": \"دنده ای\",\r\n        \"بیمه\": \"6 ماه\",\r\n        \"مدل\": \"405SLX\"\r\n    },\r\n    \"user_id\": \"1\",\r\n    \"categories_id\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/products/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"A.noroozi\",\r\n    \"password\" : \"Password@1234\",\r\n    \"phone_number\" : \"09054518642\",\r\n    \"role_name\" : \"admin\",\r\n    \"city_id\" : \"2\",\r\n    \"full_name\" : \"Amir Noroozi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3030/user/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"A.noroozi\",\r\n    \"password\" : \"Password@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3030/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:3030/user/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3030/user/getInfo",
+							"host": [
+								"localhost"
+							],
+							"port": "3030",
+							"path": [
+								"user",
+								"getInfo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

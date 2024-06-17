@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 07, 2024 at 12:44 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Jun 17, 2024 at 09:37 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -206,13 +206,6 @@ CREATE TABLE `products` (
   `categories_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`product_id`, `title`, `description`, `price`, `address`, `status`, `data`, `pathImages`, `user_id`, `categories_id`) VALUES
-('Mm0bmBD54', 'پژو 405SLX', 'ماشین خواب بوده', '400000000', 'سیدی، اصلانی 62', 'کارکرده', '{\"سال تولید\":\"1395\",\"برند\":\"پژو\",\"رنگ\":\"نقره ای\",\"وضعیت شاسی\":\"سالم\",\"نوع سوخت\":\"بنزین\",\"گیربکس\":\"دنده ای\",\"بیمه\":\"6 ماه\",\"مدل\":\"405SLX\"}', '[\"src/Hi\",\"src/Hello\"]', '1', 4);
-
 -- --------------------------------------------------------
 
 --
@@ -248,36 +241,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`token`, `info`) VALUES
-('-hle-kZqs', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:22:10\",\"expired\":\"Mon, 06 May 2024 16:52:10 GMT\"}'),
-('1', '1'),
-('75VsXRJka', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:26:26\",\"expired\":\"Mon, 06 May 2024 16:56:26 GMT\"}'),
-('8D-oB5ABA', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:33:33\",\"expired\":\"Mon, 06 May 2024 17:03:33 GMT\"}'),
-('8KXTSeWm4', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/16\",\"time\":\"13:40:41\",\"expired\":\"Sun, 05 May 2024 10:10:41 GMT\"}'),
-('9yO1Im6wl', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:21:20\",\"expired\":\"Mon, 06 May 2024 16:51:20 GMT\"}'),
-('dzXWQPyNP', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:33:21\",\"expired\":\"Mon, 06 May 2024 17:03:21 GMT\"}'),
-('EUUzVbprq', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:54:11\",\"expired\":\"Sat, 27 Apr 2024 07:24:11 GMT\"}'),
-('f8blm7K_g', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:24:29\",\"expired\":\"Mon, 06 May 2024 16:54:29 GMT\"}'),
-('fc0Cwengh', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"11:01:49\",\"expired\":\"Sat, 27 Apr 2024 07:31:49 GMT\"}'),
-('hOI9qYGP6', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/06\",\"time\":\"22:41:41\",\"expired\":\"Fri, 26 Apr 2024 19:11:41 GMT\"}'),
-('Iduwo_tAN', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:16:11\",\"expired\":\"Mon, 06 May 2024 16:46:11 GMT\"}'),
-('jtJ-ADBEB', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:48:53\",\"expired\":\"Sat, 27 Apr 2024 07:18:53 GMT\"}'),
-('mFHQ_K9q_', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:24:43\",\"expired\":\"Mon, 06 May 2024 16:54:43 GMT\"}'),
-('MIdk0EBCG', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:45:08\",\"expired\":\"Mon, 06 May 2024 17:15:08 GMT\"}'),
-('MnI71PYCF', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:53:22\",\"expired\":\"Sat, 27 Apr 2024 07:23:22 GMT\"}'),
-('obVF5xBN_', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:25:49\",\"expired\":\"Mon, 06 May 2024 16:55:49 GMT\"}'),
-('oE-PnGTWt', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/07\",\"time\":\"23:01:23\",\"expired\":\"Fri, 26 Apr 2024 19:31:23 GMT\"}'),
-('OIuvoJeYL', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:53:52\",\"expired\":\"Sat, 27 Apr 2024 07:23:52 GMT\"}'),
-('OtSbCznwd', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:35:04\",\"expired\":\"Mon, 06 May 2024 17:05:04 GMT\"}'),
-('pzBfVOpSp', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"11:00:26\",\"expired\":\"Sat, 27 Apr 2024 07:30:26 GMT\"}'),
-('rHJYpwJ_J', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:19:06\",\"expired\":\"Mon, 06 May 2024 16:49:06 GMT\"}'),
-('SBtOiljWu', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:45:48\",\"expired\":\"Mon, 06 May 2024 17:15:48 GMT\"}'),
-('t6O9x10c2', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:21:50\",\"expired\":\"Mon, 06 May 2024 16:51:50 GMT\"}'),
-('TjntpwBUz', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:56:48\",\"expired\":\"Sat, 27 Apr 2024 07:26:48 GMT\"}'),
-('W7LfZBqCz', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:43:06\",\"expired\":\"Mon, 06 May 2024 17:13:06 GMT\"}'),
-('X45K-xcR2', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:27:26\",\"expired\":\"Mon, 06 May 2024 16:57:26 GMT\"}'),
-('XRS0ega9D', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:58:17\",\"expired\":\"Sat, 27 Apr 2024 07:28:17 GMT\"}'),
-('ZqIYOuQw2', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/17\",\"time\":\"20:34:28\",\"expired\":\"Mon, 06 May 2024 17:04:28 GMT\"}'),
-('_aipz-QgH', '{\"role\":\"visitor\",\"user_id\":\"\",\"date\":\"1403/02/08\",\"time\":\"10:47:38\",\"expired\":\"Sat, 27 Apr 2024 07:17:38 GMT\"}');
+('7645e373-fef7-4583-9675-b4f006135e46', '{\"username\":\"A.noroozi\",\"role_name\":\"admin\"}');
 
 -- --------------------------------------------------------
 
@@ -339,16 +303,16 @@ CREATE TABLE `users` (
   `phone_number` varchar(11) NOT NULL,
   `city_id` int(11) NOT NULL,
   `role_name` varchar(15) NOT NULL,
-  `user` varchar(15) NOT NULL,
-  `pass` varchar(8) NOT NULL
+  `username` varchar(15) NOT NULL,
+  `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `full_name`, `phone_number`, `city_id`, `role_name`, `user`, `pass`) VALUES
-('1', 'امیر نوروزی', '09054518642', 2, 'admin', 'A.noroozi', 'AmirAgha');
+INSERT INTO `users` (`user_id`, `full_name`, `phone_number`, `city_id`, `role_name`, `username`, `password`) VALUES
+('MfUK_d16E', 'Amir Noroozi', '09054518642', 2, 'admin', 'A.noroozi', '$2b$10$8TodugMX1OXzDyBtTPr3I.psSU85aHGU2nOMcU81yoG0g8nt9VPTC');
 
 --
 -- Indexes for dumped tables
