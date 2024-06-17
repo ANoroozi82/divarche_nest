@@ -8,11 +8,11 @@ import {
   Body,
   NotFoundException, Res
 } from "@nestjs/common";
-import { UserService } from "../services/user/user.service";
+import { UserService } from "../../services/user/user.service";
 import { Response } from "express";
-import { ResponseService } from "../services/response/response.service";
+import { ResponseService } from "../../services/response/response.service";
 import { uuid } from "uuidv4";
-import { sessionService } from "../services/session/session.service";
+import { sessionService } from "../../services/session/session.service";
 
 
 @Controller("user")
@@ -64,20 +64,13 @@ export class UserinfoController {
             , en: "The password is not correct"
           }));
         } else {
-          let token = await this.sessionService.get();
-          if (token.length === 0) {
-            token = crypto.randomUUID();
-            await this.sessionService.insert("token", `'${token}'`);
+
             return res.status(200).json(ResponseService.setMeta({
               fa: "ورود با موفقیت انجام شد",
               en: "Login was successful"
             }));
-          } else {
-            return res.status(403).json(ResponseService.setMeta({
-              fa: "شما قبلا وارد شدید",
-              en: "You are already logged in"
-            }));
-          }
+
+
         }
       }
 
@@ -91,19 +84,11 @@ export class UserinfoController {
   @Put("logout")
   async logout(@Res() res: Response) {
     try {
-      let token = await this.sessionService.get();
-      if (token.length === 0) {
-        return res.status(403).json(ResponseService.setMeta({
-          fa: "شما دستررسی ندارید",
-          en: "access Denied!!!"
-        }));
-      } else {
-        await this.sessionService.deleteSpecificRecord(["token", "=", `${token[0].token}`]);
         return res.status(200).json(ResponseService.setMeta({
           fa: "با موفقیت خارج شدید",
           en: "You have exited successfully"
         }));
-      }
+
     } catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message
@@ -114,18 +99,12 @@ export class UserinfoController {
   @Get("getInfo")
   async getInfo(@Res() res: Response, @Body() body: object) {
     try {
-      let token = await this.sessionService.get();
-      if (token.length === 0) {
-        return res.status(403).json(ResponseService.setMeta({
-          fa: "شما دستررسی ندارید",
-          en: "access Denied!!!"
-        }));
-      } else {
+
         const id = Object.values(body);
         const user = await this.userService.getSpecificRecord("*", ["user_id", "=", id[0]]);
         return res.status(200).json(ResponseService.setMeta(user));
       }
-    } catch (error) {
+     catch (error) {
       return res.status(409).json(ResponseService.setMeta({
         errors: error.message
       }));
@@ -134,13 +113,7 @@ export class UserinfoController {
   @Post("updateInfo")
   async updateInfo(@Res() res: Response, @Body() body: object) {
     try {
-      let token = await this.sessionService.get();
-      if (token.length === 0) {
-        return res.status(403).json(ResponseService.setMeta({
-          fa: "شما دستررسی ندارید",
-          en: "access Denied!!!"
-        }))
-      } else{
+
         const userValue = Object.values(body);
         await this.userService.updateSpecificRecord(`city_id='${userValue[1]}',phone_number='${userValue[2]}'`, ["user_id","=" ,userValue[0]])
         return res.status(200).json(ResponseService.setMeta({
@@ -149,7 +122,7 @@ export class UserinfoController {
           }
         ));
       }
-    } catch (e) {
+     catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message
       }));
