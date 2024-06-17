@@ -99,10 +99,8 @@ exports.addProduct = {
 };
 exports.getInfo = {
     "type": "object",
-    "properties": {
-        "id": { "type": "string" }
-    },
-    "required": ["id"],
+    "properties": {},
+    "required": [],
     "additionalProperties": false
 };
 exports.nothing = {

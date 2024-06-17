@@ -6,7 +6,6 @@ import * as  ShortID from "shortid";
 import { CategoryService } from "../../services/category/category.service";
 import { FieldsService } from "../../services/fields/fields.service";
 import { CategoriesService } from "../../services/categories/categories.service";
-import { sessionService } from "../../services/session/session.service";
 import { RolesGuard } from "src/roles/roles.decorator";
 import { Role } from "../../roles/roles.enum";
 
@@ -18,7 +17,6 @@ export class PostsController {
     private categoryService: CategoryService,
     private fieldsService: FieldsService,
     private categoriesService: CategoriesService,
-    private readonly sessionService: sessionService
   ) {
   }
 
@@ -46,7 +44,6 @@ export class PostsController {
   @Post("product")
   async createPost(@Body() body: object, @Res() res: Response) {
     try {
-
       const keys = Object.keys(body);
       keys.push("product_id");
       const values = Object.values(body);

@@ -99,10 +99,8 @@ export const addProduct: object = {
 };
 export const getInfo: object = {
   "type": "object",
-  "properties": {
-    "id": { "type": "string" }
-  },
-  "required": ["id"],
+  "properties": {},
+  "required": [],
   "additionalProperties": false
 };
 

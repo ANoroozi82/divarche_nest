@@ -19,15 +19,16 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
+
     try {
       const request = context.switchToHttp().getRequest<Request>();
       const result = await this.sessionService.getSpecificRecord('info', ['token', '=', request['cookies']['token']]);
       const json = JSON.parse(result[0]['info']);
       
-      return requiredRoles.some((role) => json.role.includes(role));
+      return requiredRoles.some((role) => json['role_name'].includes(role));
     }
     catch (err) {
-      return requiredRoles.some((role) => 'user'.includes(role));      
+      return requiredRoles.some((role) => 'user'.includes(role));
     }
   }
 }
