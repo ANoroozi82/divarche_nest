@@ -7,9 +7,7 @@ import { sessionService } from "../../services/session/session.service";
 import { RolesGuard } from "src/roles/roles.decorator";
 import { Role } from "src/roles/roles.enum";
 import * as bcrypt from 'bcrypt';
-import { promises } from "dns";
 import { uuid } from "uuidv4";
-import { json } from "stream/consumers";
 
 
 @Controller("user")
@@ -22,12 +20,13 @@ export class UserinfoController {
   @RolesGuard(Role.User)
   @Post("signup")
   async signup(@Res() res: Response, @Body() body: object) {
-    try { 
+    try {
       const userValues = Object.values(body);
-      const isAvailableUser = await this.userService.getSpecificRecord("*", ["username", "=", `${userValues[4]}`]);
+      const isAvailableUser = await this.userService.getSpecificRecord("*", ["username", "=", `${body['username']}`]);
       if (isAvailableUser.length === 0) {
         body['password'] = await this.encryptPassword(body['password']);
         body['user_id'] = ShortID.generate();
+        body['role_name'] = 'admin';
         const { keys, values } = this.extractKeyAndValue(body);
         await this.userService.insert(keys, values);
         return res.status(200).json(ResponseService.setMeta({
@@ -52,26 +51,33 @@ export class UserinfoController {
   async login(@Res() res: Response, @Body() body: object) {
     try {
       const resPassword = await this.userService.getSpecificRecord('username, password, role_name', ['username', '=', `${body['username']}`]);
-      if (await this.checkPassword(body['password'], resPassword[0]['password'])) {
-        delete resPassword[0].password;
-        const token = uuid();
-        const resSession = await this.sessionService.insert('token, info', `'${token}', '${JSON.stringify(resPassword[0])}'`);
-        res.cookie('token', token, { 
-          httpOnly: true,
-          path: '/',
-          maxAge: 3600000
-        }).status(200).json(ResponseService.setMeta({
-          fa: "ورود با موفقیت انجام شد",
-          en: "Login was successful"
-        }));
-        console.log();
+      if (resPassword.length === 1) {
+        if (await this.checkPassword(body['password'], resPassword[0]['password'])) {
+          delete resPassword[0].password;
+          const token = uuid();
+          const resSession = await this.sessionService.insert('token, info', `'${token}', '${JSON.stringify(resPassword[0])}'`);
+          res.cookie('token', token, {
+            httpOnly: true,
+            path: '/',
+            maxAge: 3600000
+          }).status(200).json(ResponseService.setMeta({
+            fa: "ورود با موفقیت انجام شد",
+            en: "Login was successful"
+          }));
+          console.log();
+        } else {
+          return res.status(409).json(ResponseService.setMeta({
+            fa: "رمز ورود درست نمی باشد",
+            en: "The password is not correct"
+          }));
+        }
       } else {
-        return res.status(409).json(ResponseService.setMeta({
-          fa: "رمز ورود درست نمی باشد"
-          , en: "The password is not correct"
+        return res.status(404).json(ResponseService.setMeta({
+          fa: "نام کاربری یافت نشد", 
+          en: "The password is not found"
         }));
       }
-    } catch (e) { 
+    } catch (e) {
       return res.status(409).json(ResponseService.setMeta({
         errors: e.message
       }));
@@ -82,7 +88,7 @@ export class UserinfoController {
   @Put("logout")
   async logout(@Res() res: Response, @Req() req: Request) {
     try {
-      const resDelete = await this.sessionService.deleteSpecificRecord(['token', '=' ,`${req['cookies']['token']}`]);
+      const resDelete = await this.sessionService.deleteSpecificRecord(['token', '=', `${req['cookies']['token']}`]);
       return res.clearCookie('token').status(200).json(ResponseService.setMeta({
         fa: "با موفقیت خارج شدید",
         en: "You have exited successfully"
@@ -96,7 +102,7 @@ export class UserinfoController {
 
   @RolesGuard(Role.Admin)
   @Get("getInfo")
-  async getInfo(@Req() req: Request ,@Res() res: Response, @Body() body: object) {
+  async getInfo(@Req() req: Request, @Res() res: Response, @Body() body: object) {
     try {
       const sessionRes = await this.sessionService.getSpecificRecord('info', ['token', '=', req['cookies']['token']]);
       const user = await this.userService.getSpecificRecord("*", ["username", "=", JSON.parse(sessionRes[0]['info'])['username']]);
@@ -144,8 +150,8 @@ export class UserinfoController {
     const value = Object.values(body);
 
     return {
-      keys : key.join(', '),
-      values : value.map(item => `'${item}'`).join(', ')
+      keys: key.join(', '),
+      values: value.map(item => `'${item}'`).join(', ')
     }
   }
 }

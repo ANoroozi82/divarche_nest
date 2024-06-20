@@ -31,10 +31,11 @@ let UserinfoController = class UserinfoController {
     async signup(res, body) {
         try {
             const userValues = Object.values(body);
-            const isAvailableUser = await this.userService.getSpecificRecord("*", ["username", "=", `${userValues[4]}`]);
+            const isAvailableUser = await this.userService.getSpecificRecord("*", ["username", "=", `${body['username']}`]);
             if (isAvailableUser.length === 0) {
                 body['password'] = await this.encryptPassword(body['password']);
                 body['user_id'] = ShortID.generate();
+                body['role_name'] = 'admin';
                 const { keys, values } = this.extractKeyAndValue(body);
                 await this.userService.insert(keys, values);
                 return res.status(200).json(response_service_1.ResponseService.setMeta({
@@ -58,24 +59,32 @@ let UserinfoController = class UserinfoController {
     async login(res, body) {
         try {
             const resPassword = await this.userService.getSpecificRecord('username, password, role_name', ['username', '=', `${body['username']}`]);
-            if (await this.checkPassword(body['password'], resPassword[0]['password'])) {
-                delete resPassword[0].password;
-                const token = (0, uuidv4_1.uuid)();
-                const resSession = await this.sessionService.insert('token, info', `'${token}', '${JSON.stringify(resPassword[0])}'`);
-                res.cookie('token', token, {
-                    httpOnly: true,
-                    path: '/',
-                    maxAge: 3600000
-                }).status(200).json(response_service_1.ResponseService.setMeta({
-                    fa: "ورود با موفقیت انجام شد",
-                    en: "Login was successful"
-                }));
-                console.log();
+            if (resPassword.length === 1) {
+                if (await this.checkPassword(body['password'], resPassword[0]['password'])) {
+                    delete resPassword[0].password;
+                    const token = (0, uuidv4_1.uuid)();
+                    const resSession = await this.sessionService.insert('token, info', `'${token}', '${JSON.stringify(resPassword[0])}'`);
+                    res.cookie('token', token, {
+                        httpOnly: true,
+                        path: '/',
+                        maxAge: 3600000
+                    }).status(200).json(response_service_1.ResponseService.setMeta({
+                        fa: "ورود با موفقیت انجام شد",
+                        en: "Login was successful"
+                    }));
+                    console.log();
+                }
+                else {
+                    return res.status(409).json(response_service_1.ResponseService.setMeta({
+                        fa: "رمز ورود درست نمی باشد",
+                        en: "The password is not correct"
+                    }));
+                }
             }
             else {
-                return res.status(409).json(response_service_1.ResponseService.setMeta({
-                    fa: "رمز ورود درست نمی باشد",
-                    en: "The password is not correct"
+                return res.status(404).json(response_service_1.ResponseService.setMeta({
+                    fa: "نام کاربری یافت نشد",
+                    en: "The password is not found"
                 }));
             }
         }

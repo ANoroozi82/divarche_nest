@@ -32,7 +32,6 @@ export const signup: object = {
     "full_name": { "type": "string" },
     "phone_number": { "type": "string" },
     "city_id": { "type": "string" },
-    "role_name": { "type": "string" },
     "username": { "type": "string" },
     "password": { "type": "string" }
   },
@@ -40,7 +39,6 @@ export const signup: object = {
     "full_name",
     "phone_number",
     "city_id",
-    "role_name",
     "username",
     "password"
   ],
