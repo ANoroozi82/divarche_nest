@@ -11,13 +11,15 @@ import { CategoriesService } from "./services/categories/categories.service";
 import { CategoryService } from "./services/category/category.service";
 import { FieldsService } from "./services/fields/fields.service";
 import { sessionService } from "./services/session/session.service";
+import { CitiesService } from "./services/city/cities.service";
 import { APP_GUARD } from "@nestjs/core";
 import { RolesGuard } from "./roles/roles.gaurd";
+import { StateService } from "./services/state/state.service";
 
 @Module({
   imports: [],
   controllers: [AppController, PostsController, UserinfoController],
-  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService, {
+  providers: [AppService, UserService, ResponseService, ProductsService, CategoriesService, FieldsService, CategoryService, sessionService, CitiesService, StateService,{
     provide: APP_GUARD,
     useClass: RolesGuard,
   },]
@@ -39,6 +41,14 @@ export class AppModule implements NestModule {
       { path: "/products/category", method: RequestMethod.GET },
 
       { path: "/products/categories", method: RequestMethod.GET },
+
+      { path: "/products/cities", method: RequestMethod.GET },
+
+      { path: "/products/state", method: RequestMethod.GET },
+
+      { path: "/products/products/city", method: RequestMethod.GET },
+
+      { path: "/products/products/categories", method: RequestMethod.GET },
 
       { path: "/user/signup", method: RequestMethod.POST },
 
