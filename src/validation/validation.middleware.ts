@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { ResponseService } from "../services/response/response.service";
-import { signup, login,getInfo, updateInfo, nothing, addProduct, fields, deleteProduct } from "../schemas/schemas";
+import { signup, login, getInfo, updateInfo, nothing, addProduct, fields, deleteProduct, getProductsCity, getProductsCategories } from "../schemas/schemas";
 import { CategoriesService } from "../services/categories/categories.service";
 import { FieldsService } from "src/services/fields/fields.service";
 
@@ -14,7 +14,7 @@ export class ValidationMiddleware implements NestMiddleware {
       "POST": async () => signup
     },
     "/user/login": {
-      "PUT":async () => login
+      "PUT": async () => login
     },
     "/user/logout": {
       "PUT": async () => nothing
@@ -22,7 +22,7 @@ export class ValidationMiddleware implements NestMiddleware {
     "/user/getInfo": {
       "GET": async () => getInfo
     },
-    "/user/updateInfo":{
+    "/user/updateInfo": {
       "POST": async () => updateInfo
     },
     "/products/products": {
@@ -41,6 +41,18 @@ export class ValidationMiddleware implements NestMiddleware {
     },
     "/products/categories": {
       "GET": async () => nothing
+    },
+    "/products/cities": {
+      "GET": async () => nothing
+    },
+    "/products/state": {
+      "GET": async () => nothing
+    },
+    "/products/products/city": {
+      "GET": async () => getProductsCity 
+    },
+    "/products/products/categories": {
+      "GET": async () => getProductsCategories 
     }
   };
 

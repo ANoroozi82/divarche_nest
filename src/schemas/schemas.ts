@@ -32,7 +32,6 @@ export const signup: object = {
     "full_name": { "type": "string" },
     "phone_number": { "type": "string" },
     "city_id": { "type": "string" },
-    "role_name": { "type": "string" },
     "username": { "type": "string" },
     "password": { "type": "string" }
   },
@@ -40,7 +39,6 @@ export const signup: object = {
     "full_name",
     "phone_number",
     "city_id",
-    "role_name",
     "username",
     "password"
   ],
@@ -55,7 +53,6 @@ export const addProduct: object = {
     "price": { "type": "string" },
     "address": { "type": "string" },
     "categories_id": { "type": "string" },
-    "user_id": { "type": "string" },
     "status": { "type": "string" },
     "pathImages": { "type": "array" },
     "data": {
@@ -89,7 +86,6 @@ export const addProduct: object = {
     "description",
     "price",
     "categories_id",
-    "user_id",
     "status",
     "address",
     "data",
@@ -99,12 +95,33 @@ export const addProduct: object = {
 };
 export const getInfo: object = {
   "type": "object",
-  "properties": {
-    "id": { "type": "string" }
-  },
-  "required": ["id"],
+  "properties": {},
+  "required": [],
   "additionalProperties": false
 };
+
+export const getProductsCity = {
+  "type": "object",
+  "properties": {
+    "city_id": { "type": "string" }
+  },
+  "required": [
+    "city_id"
+  ],
+  "additionalProperties": false
+};
+
+export const getProductsCategories = {
+  "type": "object",
+  "properties": {
+    "categories_id": { "type": "string" }
+  },
+  "required": [
+    "categories_id"
+  ],
+  "additionalProperties": false
+};
+
 
 export const nothing: object = {
   "type": "object",

@@ -1,25 +1,41 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser',  // پیکربندی پارسر برای پشتیبانی از TypeScript
+  extends: [
+    'eslint:recommended',  // استفاده از تنظیمات پیش‌فرض ESLint
+    'plugin:@typescript-eslint/recommended',  // استفاده از تنظیمات توصیه‌شده برای TypeScript
+    'plugin:import/errors',  // پیکربندی import برای خطاها
+    'plugin:import/warnings',  // پیکربندی import برای هشدارها
+    'plugin:import/typescript',  // پیکربندی import برای پشتیبانی از TypeScript
+  ],
+  plugins: ['@typescript-eslint', 'import'],  // استفاده از پلاگین‌های TypeScript و import
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
   parserOptions: {
-    project: 'updateInfo.json',
-    tsconfigRootDir: __dirname,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  root: true,
-  env: {
-    node: true,
-    jest: true,
-  },
-  ignorePatterns: ['.eslintrc.js'],
   rules: {
-    '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    'indent': ['error', 2],  // تنظیم فاصله تب به ۲ فاصله
+    'linebreak-style': ['error', 'unix'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always'],
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'import/order': [
+      'error',
+      {
+        'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        'newlines-between': 'always',
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
 };
