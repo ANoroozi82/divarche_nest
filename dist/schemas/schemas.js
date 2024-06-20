@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fields = exports.deleteProduct = exports.nothing = exports.getInfo = exports.addProduct = exports.signup = exports.updateInfo = exports.login = void 0;
+exports.fields = exports.deleteProduct = exports.nothing = exports.getProductsCategories = exports.getProductsCity = exports.getInfo = exports.addProduct = exports.signup = exports.updateInfo = exports.login = void 0;
 exports.login = {
     "type": "object",
     "properties": {
@@ -55,7 +55,6 @@ exports.addProduct = {
         "price": { "type": "string" },
         "address": { "type": "string" },
         "categories_id": { "type": "string" },
-        "user_id": { "type": "string" },
         "status": { "type": "string" },
         "pathImages": { "type": "array" },
         "data": {
@@ -89,7 +88,6 @@ exports.addProduct = {
         "description",
         "price",
         "categories_id",
-        "user_id",
         "status",
         "address",
         "data",
@@ -99,10 +97,28 @@ exports.addProduct = {
 };
 exports.getInfo = {
     "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+};
+exports.getProductsCity = {
+    "type": "object",
     "properties": {
-        "id": { "type": "string" }
+        "city_id": { "type": "string" }
     },
-    "required": ["id"],
+    "required": [
+        "city_id"
+    ],
+    "additionalProperties": false
+};
+exports.getProductsCategories = {
+    "type": "object",
+    "properties": {
+        "categories_id": { "type": "string" }
+    },
+    "required": [
+        "categories_id"
+    ],
     "additionalProperties": false
 };
 exports.nothing = {
