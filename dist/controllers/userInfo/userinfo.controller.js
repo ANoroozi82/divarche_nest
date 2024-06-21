@@ -61,6 +61,7 @@ let UserinfoController = class UserinfoController {
             const resPassword = await this.userService.getSpecificRecord('username, password, role_name', ['username', '=', `${body['username']}`]);
             if (resPassword.length === 1) {
                 if (await this.checkPassword(body['password'], resPassword[0]['password'])) {
+                    await this.deleteUserSessions(body['username']);
                     delete resPassword[0].password;
                     const token = (0, uuidv4_1.uuid)();
                     const resSession = await this.sessionService.insert('token, info', `'${token}', '${JSON.stringify(resPassword[0])}'`);
@@ -69,8 +70,11 @@ let UserinfoController = class UserinfoController {
                         path: '/',
                         maxAge: 3600000
                     }).status(200).json(response_service_1.ResponseService.setMeta({
-                        fa: "ورود با موفقیت انجام شد",
-                        en: "Login was successful"
+                        message: {
+                            fa: "ورود با موفقیت انجام شد",
+                            en: "Login was successful"
+                        },
+                        token: token
                     }));
                     console.log();
                 }
@@ -150,6 +154,20 @@ let UserinfoController = class UserinfoController {
             keys: key.join(', '),
             values: value.map(item => `'${item}'`).join(', ')
         };
+    }
+    async deleteUserSessions(username) {
+        try {
+            const userSessions = await this.sessionService.getSpecificRecord('token', ['info', '=', `{"username":"${username}","role_name":"admin"}`]);
+            if (userSessions.length > 0) {
+                for (const session of userSessions) {
+                    await this.sessionService.deleteSpecificRecord(['token', '=', `${session['token']}`]);
+                }
+            }
+            return true;
+        }
+        catch (e) {
+            return true;
+        }
     }
 };
 exports.UserinfoController = UserinfoController;
