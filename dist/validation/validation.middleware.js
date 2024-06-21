@@ -60,6 +60,9 @@ let ValidationMiddleware = class ValidationMiddleware {
             },
             "/products/products/categories": {
                 "GET": async () => schemas_1.getProductsCategories
+            },
+            "/products/myproducts": {
+                "GET": async () => schemas_1.nothing
             }
         };
     }

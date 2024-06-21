@@ -53,6 +53,9 @@ export class ValidationMiddleware implements NestMiddleware {
     },
     "/products/products/categories": {
       "GET": async () => getProductsCategories 
+    },
+    "/products/myproducts": {
+      "GET": async () => nothing 
     }
   };
 

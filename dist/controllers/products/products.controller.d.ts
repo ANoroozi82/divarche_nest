@@ -18,6 +18,7 @@ export declare class PostsController {
     private sessionService;
     constructor(productsService: ProductsService, categoryService: CategoryService, fieldsService: FieldsService, categoriesService: CategoriesService, citiesService: CitiesService, stateService: StateService, userService: UserService, sessionService: sessionService);
     getPosts(res: Response): Promise<Response<any, Record<string, any>>>;
+    getMyProducts(res: Response, req: Request): Promise<Response<any, Record<string, any>>>;
     createPost(body: object, res: Response, req: Request): Promise<Response<any, Record<string, any>>>;
     deleteProduct(body: object, res: Response): Promise<Response<any, Record<string, any>>>;
     updateProduct(body: object, res: Response): Promise<Response<any, Record<string, any>>>;
