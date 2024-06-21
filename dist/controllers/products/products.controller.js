@@ -52,6 +52,18 @@ let PostsController = class PostsController {
             }));
         }
     }
+    async getMyProducts(res, req) {
+        try {
+            const user = await this.getUserId(req);
+            const result = await this.productsService.getSpecificRecord('*', ['user_id', '=', `${user}`]);
+            return res.status(200).json(result);
+        }
+        catch (e) {
+            return res.status(500).json(response_service_1.ResponseService.setMeta({
+                errors: e.message
+            }));
+        }
+    }
     async createPost(body, res, req) {
         try {
             const keys = Object.keys(body);
@@ -232,6 +244,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "getPosts", null);
+__decorate([
+    (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
+    (0, common_1.Get)("myproducts"),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Request]),
+    __metadata("design:returntype", Promise)
+], PostsController.prototype, "getMyProducts", null);
 __decorate([
     (0, roles_decorator_1.RolesGuard)(roles_enum_1.Role.Admin),
     (0, common_1.Post)("product"),

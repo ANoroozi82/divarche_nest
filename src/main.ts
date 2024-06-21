@@ -8,7 +8,8 @@ async function bootstrap() {
   const corsOptions:CorsOptions={
     origin:['http://localhost'],
     methods:['GET','POST','PUT','DELETE'],
-    allowedHeaders:['Content-Type','Authorization']
+    allowedHeaders:['Content-Type','Authorization'],
+    credentials:true
   };
   app.enableCors(corsOptions);
   app.use(cookieParser());

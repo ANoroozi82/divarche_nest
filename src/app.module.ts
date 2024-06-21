@@ -46,6 +46,8 @@ export class AppModule implements NestModule {
 
       { path: "/products/state", method: RequestMethod.GET },
 
+      { path: "/products/myproducts", method: RequestMethod.GET },
+
       { path: "/products/products/city", method: RequestMethod.GET },
 
       { path: "/products/products/categories", method: RequestMethod.GET },

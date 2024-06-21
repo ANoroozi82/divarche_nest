@@ -44,9 +44,22 @@ export class PostsController {
         errors: e.message
       }));
     }
-
   }
 
+  @RolesGuard(Role.Admin)
+  @Get("myproducts")
+  async getMyProducts(@Res() res: Response, @Req() req: Request) {
+    try{
+      const user = await this.getUserId(req);
+      const result = await this.productsService.getSpecificRecord('*', ['user_id', '=', `${user}`]);
+
+      return res.status(200).json(result);
+    } catch (e) {
+      return res.status(500).json(ResponseService.setMeta({
+        errors: e.message
+      }));
+    }
+  }
 
   @RolesGuard(Role.Admin)
   @Post("product")
