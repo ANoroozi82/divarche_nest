@@ -17,4 +17,5 @@ export declare class UserinfoController {
         keys: string;
         values: string;
     };
+    deleteUserSessions(username: any): Promise<boolean>;
 }
